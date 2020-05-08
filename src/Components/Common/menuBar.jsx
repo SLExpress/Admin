@@ -58,7 +58,7 @@ const StyleMenuItem = styled(Link)`
   text-transform: capitalize;
   position: relative;
   display: block;
-  padding-bottom: 10px;
+  padding-bottom: 1px;
   color: #8d949 !important;
   outline-width: 0;
   transition: all 0.3s ease-out;

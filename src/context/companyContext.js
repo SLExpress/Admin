@@ -21,6 +21,7 @@ const CompanyContext = React.createContext();
 
 class CompanyProvider extends Component {
   state = {
+    breadcrumb: "",
     ourVision: [],
     ourMission: [],
     ourToS: [],
@@ -65,6 +66,10 @@ class CompanyProvider extends Component {
 
   handleSearch = (query) => {
     this.setState({ searchQuery: query, currentPage: 1 });
+  };
+
+  getBreadcrumb = (url) => {
+    this.setState({ breadcrumb: url });
   };
 
   /**
@@ -263,6 +268,7 @@ class CompanyProvider extends Component {
   }
 
   render() {
+    console.log("bread", this.state.breadcrumb);
     return (
       <CompanyContext.Provider
         value={{
@@ -272,6 +278,7 @@ class CompanyProvider extends Component {
           handleNextPageChange: this.handleNextPageChange,
           handleSort: this.handleSort,
           handleSearch: this.handleSearch,
+          getBreadcrumb: this.getBreadcrumb,
           handleCategoryDelete: this.handleCategoryDelete,
           handleCategoryUpdate: this.handleCategoryUpdate,
           handleCategorySave: this.handleCategorySave,

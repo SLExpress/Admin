@@ -4,9 +4,9 @@ import { Status } from "../../../Common/icon";
 class SiteListTable extends Component {
   columns = [
     { date: "createdDate", label: "Date" },
-    // { path: "customerId", label: "Customer Name" },
-    // { path: "scriptId", label: "Site Name" },
-    { path: "url.defaultUrl", label: "Url" },
+    { path: "customerId", label: "Customer Name" },
+    { path: "scriptId", label: "Site Name" },
+    { path: "defaultUrl", label: "Url" },
     { path: "price", label: "Price" },
     {
       key: "button",

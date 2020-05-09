@@ -54,7 +54,8 @@ class CategoryForm extends Forms {
 
   render() {
     const { open, size, close } = this.context;
-    console.log("Title", this.state.title);
+    // console.log("Title", this.state.title);
+    // console.log("param", this.props.match.params.id);
     return (
       <>
         <Grid.Column

@@ -50,7 +50,7 @@ class Category extends Component {
     if (loading) {
       return <Loading />;
     }
-
+    console.log("para", this.props.match.params);
     return (
       <>
         <Grid.Column

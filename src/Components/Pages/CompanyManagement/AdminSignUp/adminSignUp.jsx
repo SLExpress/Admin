@@ -42,7 +42,7 @@ class AdminSignUp extends Forms {
       );
       Swal.fire({
         icon: "success",
-        title: "Logging in Successfully",
+        title: "Registration Completed Successfully",
         showConfirmButton: false,
         timer: 1500,
       });

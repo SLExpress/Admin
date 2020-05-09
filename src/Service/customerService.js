@@ -37,13 +37,13 @@ export function getSites() {
  * Delete Site
  */
 
-export function deleteSite(siteId) {
-  const data = {
-    id: siteId,
-    type: "customer",
-  };
-  return http.delete(apiEndpoint + "/" + "deleteUser", { data });
-}
+// export function deleteSite(siteId) {
+//   const data = {
+//     id: siteId,
+//     type: "customer",
+//   };
+//   return http.delete(apiEndpoint + "/" + "deleteUser", { data });
+// }
 
 /**
  * View Developer Tickets

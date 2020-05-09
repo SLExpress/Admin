@@ -10,13 +10,14 @@ class TableBody extends Component {
     if (column.content) return column.content(item);
     else if (column.date)
       return <Moment format="DD/MM/YYYY ">{_.get(item, column.date)}</Moment>;
-    else if (column.id) {
-      const id = _.get(item, column.id);
-      const name = this.props.map1.filter((n) => n._id == id);
-      //console.log("name", name);
-      if (name.length == 0) return "anonymus";
-      else return name[0].firstName || name[0].name;
-    } else if (column.count) {
+    // else if (column.id) {
+    //   const id = _.get(item, column.id);
+    //   const name = this.props.map1.filter((n) => n._id == id);
+    //   //console.log("name", name);
+    //   if (name.length == 0) return "anonymus";
+    //   else return name[0].firstName || name[0].name;
+    // }
+    else if (column.count) {
       var count;
       const id = _.get(item, column.count);
       console.log("id", id);
@@ -38,8 +39,8 @@ class TableBody extends Component {
 
   render() {
     const { data, columns, map1, map2, currentPage } = this.props;
-    console.log("developer", map1);
-    console.log("buyers", map2);
+    // console.log("developer", map1);
+    // console.log("buyers", map2);
     return (
       <>
         {data &&

@@ -65,15 +65,18 @@ export function downloadScript(id) {
 
   const ab = http
     .post(apiEndpoint + "/" + "downloadScript", data, responseType)
+
     .then((response) => {
       const url = window.URL.createObjectURL(
         new Blob([response.data], { type: "application/zip" })
       );
       const link = document.createElement("a");
       link.href = url;
+      link.setAttribute("href", url);
       link.setAttribute("download", "script.zip");
       document.body.appendChild(link);
       link.click();
+      link.remove();
       link.parentNode.removeChild(link);
     });
 

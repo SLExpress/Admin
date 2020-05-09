@@ -18,7 +18,7 @@ const Tables = ({
       <TableBody
         columns={columns}
         data={data}
-        map1={map1}
+        // map1={map1}
         map2={map2}
         currentPage={currentPage}
       />

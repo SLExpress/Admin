@@ -3,7 +3,7 @@ import {
   getCustomers,
   deleteCustomer,
   getSites,
-  deleteSite,
+  //deleteSite,
   getTickets,
   viewInquiries,
   replyTickets,
@@ -145,20 +145,38 @@ class CustomerProvider extends Component {
 
   async siteList() {
     const { data: sites } = await getSites();
-    this.setState({ sites: sites, loading: false });
+
+    // const { data: inquiries } = await viewInquiries(id);
+    // this.setState({ inquiry: inquiries.ticket, loading: false });
+    var siteList = sites.map((s) => {
+      var customer = this.state.customers.filter((c) => c._id == s._customerId);
+      console.log("CUS", customer);
+      return {
+        createdDate: s.createdDate,
+        customerId: customer.username,
+        id: s.id,
+        paid: s.paid,
+        price: s.price,
+        scriptId: s.scriptId,
+        customUrl: s.url.customUrl,
+        defaultUrl: s.url.defaultUrl,
+      };
+    });
+    this.setState({ sites: siteList, loading: false });
+    console.log("SITE", this.state.sites);
   }
 
-  handleSiteDelete = async (site) => {
-    const sites = this.state.sites.filter((ds) => ds._id !== site._id);
-    this.setState({ sites });
+  // handleSiteDelete = async (site) => {
+  //   const sites = this.state.sites.filter((ds) => ds._id !== site._id);
+  //   this.setState({ sites });
 
-    try {
-      await deleteSite(site._id);
-    } catch (ex) {
-      if (ex.response && ex.response.status === 404)
-        toast.error("This site has already been deleted.");
-    }
-  };
+  //   try {
+  //     await deleteSite(site._id);
+  //   } catch (ex) {
+  //     if (ex.response && ex.response.status === 404)
+  //       toast.error("This site has already been deleted.");
+  //   }
+  // };
 
   /**
    * Customer Inquiries
@@ -228,6 +246,7 @@ class CustomerProvider extends Component {
   };
 
   render() {
+    console.log("cusState", this.state.customers);
     return (
       <CustomerContext.Provider
         value={{
@@ -239,7 +258,7 @@ class CustomerProvider extends Component {
           handleSearch: this.handleSearch,
 
           handleCustomerDelete: this.handleCustomerDelete,
-          handleSiteDelete: this.handleSiteDelete,
+          // handleSiteDelete: this.handleSiteDelete,
           handleInquiries: this.handleInquiries,
           handleReply: this.handleReply,
           setOpen: this.setOpen,

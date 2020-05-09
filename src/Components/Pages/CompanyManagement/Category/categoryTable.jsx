@@ -11,7 +11,7 @@ class CategoryTable extends Component {
       content: (category) => (
         <Link to={`/category/${category._id}`}>
           <IButton
-            onSubmit={() => this.props.onUpdate(category, "mini")}
+            onSubmit={() => this.props.onUpdate(category)}
             name="edit outline"
             color="teal"
           />

@@ -1,116 +1,126 @@
-import React from "react";
+import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-//import { register } from "./../../serviceWorker";
+import { CompanyContext } from "../../../src/context/companyContext";
 
-const Header = ({ admin }) => {
-  return (
-    <Grid style={{ margin: 0, padding: 0 }}>
-      <Grid.Column
-        mobile={16}
-        tablet={16}
-        computer={16}
-        style={{ margin: 0, padding: 0 }}
-      >
-        <HeaderWrapper>
-          <div className="container-fluid">
-            <div className="row">
-              <div className="line">
-                <div className="container">
-                  <div className="row ">
-                    <div className="col-md-6 col-sm-6 col-xs-6">
-                      <Phone id="phone-number">
-                        <a
-                          href="tel:077 714 5020"
-                          style={{ color: "#fff", textDecoration: "none" }}
-                        >
-                          <i className="fa fa-phone" />
-                          <span className="text-to-hidden no-wrap">
-                            Call Us: 077 714 5020
+class Header extends Component {
+  static contextType = CompanyContext;
+
+  render() {
+    const { getBreadcrumb } = this.context;
+    const admin = this.props.admin;
+    return (
+      <Grid style={{ margin: 0, padding: 0 }}>
+        <Grid.Column
+          mobile={16}
+          tablet={16}
+          computer={16}
+          style={{ margin: 0, padding: 0 }}
+        >
+          <HeaderWrapper>
+            <div className="container-fluid">
+              <div className="row">
+                <div className="line">
+                  <div className="container">
+                    <div className="row ">
+                      <div className="col-md-6 col-sm-6 col-xs-6">
+                        <Phone id="phone-number">
+                          <a
+                            href="tel:077 714 5020"
+                            style={{ color: "#fff", textDecoration: "none" }}
+                          >
+                            <i className="fa fa-phone" />
+                            <span className="text-to-hidden no-wrap">
+                              Call Us: 077 714 5020
+                            </span>
+                          </a>
+                          <span id="middle-border">&nbsp;</span>
+                          <a
+                            href="mailto:admin@slexpress.lk"
+                            style={{ color: "#fff", textDecoration: "none" }}
+                          >
+                            <i className="fa fa-envelope" />
+                            <span className="text-to-hidden">
+                              Email: admin@slexpress.lk
+                            </span>
+                          </a>
+                        </Phone>
+                      </div>
+                      <div className="col-md-3 offset-md-3  col-sm-6 col-xs-6">
+                        <div id="phone-number">
+                          <i className="fa fa-lock" />
+                          <span className="login-register">
+                            {!admin && (
+                              <>
+                                <Link
+                                  style={{
+                                    color: "#fff",
+                                    textDecoration: "none",
+                                  }}
+                                  to="/admin-sign-in"
+                                  onClick={() => getBreadcrumb("admin sign in")}
+                                >
+                                  Login
+                                </Link>
+                              </>
+                            )}
+                            {admin && (
+                              <>
+                                <Link
+                                  style={{
+                                    color: "#fff",
+                                    textDecoration: "none",
+                                  }}
+                                  to="/logOut"
+                                >
+                                  Log Out
+                                </Link>
+                                <Link
+                                  style={{
+                                    color: "#fff",
+                                    textDecoration: "none",
+                                  }}
+                                  to="/admin-sign-up"
+                                  onClick={() => getBreadcrumb("admin sign up")}
+                                >
+                                  / New Admin
+                                </Link>
+                              </>
+                            )}
                           </span>
-                        </a>
-                        <span id="middle-border">&nbsp;</span>
-                        <a
-                          href="mailto:admin@slexpress.lk"
-                          style={{ color: "#fff", textDecoration: "none" }}
-                        >
-                          <i className="fa fa-envelope" />
-                          <span className="text-to-hidden">
-                            Email: admin@slexpress.lk
-                          </span>
-                        </a>
-                      </Phone>
-                    </div>
-                    <div className="col-md-3 offset-md-3  col-sm-6 col-xs-6">
-                      <div id="phone-number">
-                        <i className="fa fa-lock" />
-                        <span className="login-register">
-                          {!admin && (
-                            <>
-                              <Link
-                                style={{
-                                  color: "#fff",
-                                  textDecoration: "none",
-                                }}
-                                to="/admin-sign-in"
-                              >
-                                Login
-                              </Link>
-                            </>
-                          )}
-                          {admin && (
-                            <>
-                              <Link
-                                style={{
-                                  color: "#fff",
-                                  textDecoration: "none",
-                                }}
-                                to="/logOut"
-                              >
-                                Log Out
-                              </Link>
-                              <Link
-                                style={{
-                                  color: "#fff",
-                                  textDecoration: "none",
-                                }}
-                                to="/admin-sign-up"
-                              >
-                                / New Admin
-                              </Link>
-                            </>
-                          )}
-                        </span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="row">
-              <div className="container">
-                <div className="row">
-                  <div className="col-md-4">
-                    <div>
-                      <SLexpresslk className="logo-and-nav">
-                        <h1 style={{ marginTop: "25px", fontSize: "45px" }}>
-                          <center>
-                            <Link
-                              to="/"
-                              style={{ color: "#fff", textDecoration: "none" }}
-                            >
-                              SLExpress
-                            </Link>
-                          </center>
-                        </h1>
-                      </SLexpresslk>
+              <div className="row">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-4">
+                      <div>
+                        <SLexpresslk className="logo-and-nav">
+                          <h1 style={{ marginTop: "25px", fontSize: "45px" }}>
+                            <center>
+                              <Link
+                                to="/"
+                                style={{
+                                  color: "#fff",
+                                  textDecoration: "none",
+                                }}
+                              >
+                                SLExpress
+                              </Link>
+                            </center>
+                          </h1>
+                        </SLexpresslk>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-md-8">
-                    <div id="nav-bar">
-                      <ul>
-                        {/* <li>
+                    <div className="col-md-8">
+                      <div id="nav-bar">
+                        <ul>
+                          {/* <li>
                           <Link
                             style={{ color: "#fff", textDecoration: "none" }}
                             to="/"
@@ -118,7 +128,7 @@ const Header = ({ admin }) => {
                             HOME
                           </Link>
                         </li> */}
-                        {/* <li>
+                          {/* <li>
                           <Link
                             style={{ color: "#fff", textDecoration: "none" }}
                             to="/pricing"
@@ -126,7 +136,7 @@ const Header = ({ admin }) => {
                             PRICING
                           </Link>
                         </li> */}
-                        {/* <li>
+                          {/* <li>
                           <Link
                             style={{ color: "#fff", textDecoration: "none" }}
                             to="/aboutus"
@@ -134,7 +144,7 @@ const Header = ({ admin }) => {
                             ABOUT US
                           </Link>
                         </li> */}
-                        {/* <li>
+                          {/* <li>
                           <Link
                             style={{ color: "#fff", textDecoration: "none" }}
                             to="/contactus"
@@ -142,7 +152,7 @@ const Header = ({ admin }) => {
                             CONTACT US
                           </Link>
                         </li> */}
-                        {/* <li>
+                          {/* <li>
                           <Link
                             style={{ color: "#fff", textDecoration: "none" }}
                             to="/categories"
@@ -150,20 +160,20 @@ const Header = ({ admin }) => {
                             CATEGORIES
                           </Link>
                         </li> */}
-                        {/* <DropDown /> */}
-                      </ul>
+                          {/* <DropDown /> */}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </HeaderWrapper>
-      </Grid.Column>
-    </Grid>
-  );
-};
-
+          </HeaderWrapper>
+        </Grid.Column>
+      </Grid>
+    );
+  }
+}
 export default Header;
 
 const HeaderWrapper = styled.div`

@@ -16,21 +16,21 @@ axios.interceptors.response.use(null, (error) => {
 });
 
 // axios({
-//   url: "http://slexpress.tk:3000/admin/getCompanyDetails",
-//   method: "get",
-//   // data: {
-//   // content: " Mission added",
-//   //  ticketId: "5e8eaefff85bf12c506bd3d5",
-//   //   lastname: "Saubhagyaqsd",
-//   //   email: "yasmikasyasssdhq@gmail.com",
-//   //   password: "qqqqqqqsdq",
-//   //   phone: 1501762822
-//   //},
+//   url: "http://slexpress.tk:3000/admin/getEarnings",
+//   method: "post",
+//   data: {
+//     month: "3",
+//     year: "2020",
+//     //   lastname: "Saubhagyaqsd",
+//     //   email: "yasmikasyasssdhq@gmail.com",
+//     //   password: "qqqqqqqsdq",
+//     //   phone: 1501762822
+//   },
 
 //   headers: {
 //     "Content-Type": "application/json",
 //     Authorization:
-//       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTIwMDczNDkzNWQ0ZDNmMmI0NWE0OTMiLCJlbWFpbCI6ImNjY2NAZ21haWwuY29tIiwiaWF0IjoxNTg2NTAxOTAxLCJleHAiOjE1ODY1MDU1MDF9.pRhpVi5Uz0G80QfRPS5ks9xjAgTwhyAukJJVobej-ik",
+//       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWI2NTE0MTIzYzExNDJlY2I0ZGE1ZWQiLCJlbWFpbCI6ImNjY2NAZ21haWwuY29tIiwiaWF0IjoxNTg5MDEzNzQ4LCJleHAiOjE1ODkwMTczNDh9.pphEYsyZHfo3xcOvcXrY3tUjZBvRKieLopXgJr4M7dQ",
 //   },
 // })
 //   .then((response) => console.log(response))

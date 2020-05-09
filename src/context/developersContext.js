@@ -130,7 +130,24 @@ class DeveloperProvider extends Component {
 
   async scriptList() {
     const { data: scriptList } = await getScripts();
-    this.setState({ scripts: scriptList.scripts, loading: false });
+
+    var scr = scriptList.scripts.map((s) => {
+      var dev = this.state.developers.filter((d) => d._id == s.developer);
+      // console.log("CUS", dev[0].firstName);
+      return {
+        addedDate: s.addedDate,
+        approved: s.approved,
+        description: s.description,
+        developer: dev[0].firstName,
+        id: s.id,
+        image: s.image,
+        name: s.name,
+        price: s.price,
+        size: s.size,
+      };
+    });
+
+    this.setState({ scripts: scr, loading: false });
     this.setState({ buyers: scriptList.scriptCustomers });
   }
 
@@ -166,7 +183,7 @@ class DeveloperProvider extends Component {
   };
 
   handleDownloadScripts = async (script) => {
-    console.log("scriptid", script.id);
+    //  console.log("scriptid", script.id);
     try {
       // const res =
       await downloadScript(script.id);
@@ -246,7 +263,7 @@ class DeveloperProvider extends Component {
   };
 
   render() {
-    // console.log("developers", this.state.developers);
+    // console.log("SCRIPTS", this.state.scripts);
     //console.log("moment2", moment("2020-04-01T19:34:07.418Z").unix());
     //  console.log("buyersssss", this.state.buyers);
     return (

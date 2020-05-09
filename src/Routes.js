@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
+import Home from "./Components/Pages/CompanyManagement/Home/home";
 import Dashboard from "./Components/Pages/CompanyManagement/Dashboard/dashboard";
 import CompanyDetails from "./Components/Pages/CompanyManagement/CompanyDetails/companyDetails";
 //import CompanyDetailsForm from "./Components/Pages/CompanyManagement/CompanyDetails/comanyDetailsForm";
@@ -8,7 +9,6 @@ import ContactDetails from "./Components/Pages/CompanyManagement/ContactDetails/
 import TermsOfServices from "./Components/Pages/CompanyManagement/TermsOfServices/termsOfServices";
 import Category from "./Components/Pages/CompanyManagement/Category/category";
 import CategoryForm from "./Components/Pages/CompanyManagement/Category/categoryForm";
-import Sale from "./Components/Pages/CompanyManagement/Sale/sale";
 import AdminSignIn from "./Components/Pages/CompanyManagement/AdminSignIn/adminSignIn";
 import AdminSignUp from "./Components/Pages/CompanyManagement/AdminSignUp/adminSignUp";
 
@@ -17,6 +17,7 @@ import SiteList from "./Components/Pages/CustomerManagement/SiteList/siteList";
 import DomainList from "./Components/Pages/CustomerManagement/DomainList/domainList";
 import CustomerTickets from "./Components/Pages/CustomerManagement/CustomerInquiries/customerTickets";
 import CustomerInquiries from "./Components/Pages/CustomerManagement/CustomerInquiries/customerInquiries";
+import Income from "./Components/Pages/CustomerManagement/Income/income";
 import UserDetails from "./Components/Pages/CustomerManagement/CustomerDetails/userDetails";
 
 import DeveloperList from "./Components/Pages/DeveloperManagement/DeveloperList/developerList";
@@ -28,19 +29,20 @@ import DeveloperInquiries from "./Components/Pages/DeveloperManagement/Developer
 
 import BusinessUserList from "./Components/Pages/BusinessPlanManagement/BusinessUserList/businessUserList";
 import QuestionsAdding from "./Components/Pages/BusinessPlanManagement/QuestionAdding/questionsAdding";
+import QuestionList from "./Components/Pages/BusinessPlanManagement/QuestionList/questionList";
 import LogOut from "./Components/Common/logOut";
 
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/Dashboard" component={Dashboard} />
+      <Route exact path="/" component={Home} />
+      <Route path="/Dashboard" component={Dashboard} />
       <Route path="/Company-Details" component={CompanyDetails} />
       {/* <Route path="/Company-Details/:id" component={CompanyDetailsForm} /> */}
       <Route path="/Contact-Details" component={ContactDetails} />
       <Route path="/Category/:id" component={CategoryForm} />
       <Route path="/Terms-Of-Services" component={TermsOfServices} />
       <Route path="/Category" component={Category} />
-      <Route path="/Sale" component={Sale} />
       <Route path="/Admin-Sign-In" component={AdminSignIn} />
       <Route path="/LogOut" component={LogOut} />
       <Route path="/Admin-Sign-Up" component={AdminSignUp} />
@@ -50,6 +52,7 @@ const Routes = () => {
       <Route path="/Domain-List" component={DomainList} />
       <Route path="/Customer-Tickets" component={CustomerTickets} />
       <Route path="/Customer-Inquiries/:id" component={CustomerInquiries} />
+      <Route path="/Income" component={Income} />
       <Route path="/UserDetails" component={UserDetails} />
 
       <Route path="/Developer-List" component={DeveloperList} />
@@ -61,6 +64,7 @@ const Routes = () => {
 
       <Route path="/Business-User-List" component={BusinessUserList} />
       <Route path="/Question-Adding" component={QuestionsAdding} />
+      <Route path="/Question-List" component={QuestionList} />
     </Switch>
   );
 };

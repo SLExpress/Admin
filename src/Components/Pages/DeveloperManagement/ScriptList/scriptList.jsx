@@ -8,7 +8,7 @@ import {
 } from "../../../Common/CommonStyle";
 import Pagination from "../../../Common/pagination";
 import { paginate } from "../../../Common/paginate";
-import DeveloperSiteListTable from "./scriptListTable";
+import ScriptListTable from "./scriptListTable";
 import { DeveloperContext } from "../../../../context/developersContext";
 import { SearchBar, Loading } from "../../../Common/icon";
 import _ from "lodash";
@@ -68,9 +68,9 @@ class ScriptList extends Component {
                 <Grid>
                   <Grid.Column mobile={11} tablet={11} computer={11}>
                     {count === 0 ? (
-                      <StyledPara>There are no Developers.</StyledPara>
+                      <StyledPara>There are no Scripts.</StyledPara>
                     ) : (
-                      <StyledPara>Showing {totalCount} Developers.</StyledPara>
+                      <StyledPara>Showing {totalCount} Scripts.</StyledPara>
                     )}
                   </Grid.Column>
                   <Grid.Column mobile={5} tablet={5} computer={5}>
@@ -78,9 +78,9 @@ class ScriptList extends Component {
                   </Grid.Column>
                 </Grid>
                 <br />
-                <DeveloperSiteListTable
+                <ScriptListTable
                   scripts={allScripts}
-                  map1={developers}
+                  // map1={developers}
                   map2={buyers}
                   onApprovel={handleApprovel}
                   onDownloadScripts={handleDownloadScripts}

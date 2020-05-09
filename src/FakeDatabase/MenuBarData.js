@@ -1,6 +1,6 @@
 const MenuData = [
   {
-    header: "Company Management",
+    header: "COMPANY MANAGEMENT",
     list: [
       { name: "dashboard", icon: "dashboard" },
       { name: "company details", icon: "building outline" },
@@ -16,7 +16,7 @@ const MenuData = [
     ],
   },
   {
-    header: "Customer Management",
+    header: "CUSTOMER MANAGEMENT",
     list: [
       { name: "user list", icon: "users" },
       { name: "site list", icon: "cart" },
@@ -28,7 +28,7 @@ const MenuData = [
     ],
   },
   {
-    header: "Developer Management",
+    header: "DEVELOPER MANAGEMENT",
     list: [
       { name: "developer list", icon: "user secret" },
       { name: "script list", icon: "file archive" },
@@ -38,10 +38,11 @@ const MenuData = [
     ],
   },
   {
-    header: "Business Plan Management",
+    header: "BUSINESS PLAN MANAGEMENT",
     list: [
       { name: "business user list", icon: "warehouse" },
       { name: "question adding", icon: "question" },
+      { name: "question List", icon: "question" },
     ],
   },
 ];

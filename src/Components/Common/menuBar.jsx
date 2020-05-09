@@ -3,25 +3,25 @@ import { Menu, Icon, Grid } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { getMenu } from "../../FakeDatabase/MenuBarData";
 import styled from "styled-components";
+import { CompanyContext } from "../../../src/context/companyContext";
 
 class MenuBar extends Component {
+  static contextType = CompanyContext;
   state = {
     MenuData: getMenu(),
     // activeItem: "dashboard",
   };
 
-  // handleItemClick = (item) => this.setState({ activeItem: item });
-
-  renderUrl = (item) => {
+  renderUrl(item) {
     const parts = item.split(" ");
     const combined = parts.join("-");
     return combined;
-  };
+  }
 
   render() {
     // const { activeItem } = this.state;
     // console.log("activeItem", this.state.activeItem);
-
+    const { getBreadcrumb } = this.context;
     return (
       <Grid.Column mobile={3} tablet={3} computer={3}>
         <Menu text pointing secondary vertical>
@@ -35,9 +35,11 @@ class MenuBar extends Component {
                     <Menu.Item key={item.name}>
                       <StyleMenuItem
                         to={"/" + this.renderUrl(item.name)}
+                        onClick={() => getBreadcrumb(item.name)}
                         // active={activeItem === item}
                         // onClick={() => this.handleItemClick(item)}
                       >
+                        {/* {this.setUrl(item.name)} */}
                         <Icon circular inverted color="teal" name={item.icon} />
                         {item.name}
                       </StyleMenuItem>
@@ -58,7 +60,7 @@ const StyleMenuItem = styled(Link)`
   text-transform: capitalize;
   position: relative;
   display: block;
-  padding-bottom: 1px;
+  padding-bottom: 0px;
   color: #8d949 !important;
   outline-width: 0;
   transition: all 0.3s ease-out;

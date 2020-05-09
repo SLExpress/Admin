@@ -7,9 +7,9 @@ import { Status } from "../../../Common/icon";
 class ScriptListTable extends Component {
   columns = [
     { date: "addedDate", label: "Date" },
-    { id: "developer", label: "Developer Name" },
+    { path: "developer", label: "Developer Name" },
     { path: "name", label: "Site Name" },
-    //{ path: "scripts.size", label: "Size" },
+    { path: "size", label: "Size" },
     { path: "price", label: "Price" },
     { count: "id", label: "Buyers" },
     {
@@ -54,7 +54,7 @@ class ScriptListTable extends Component {
       <Tables
         columns={this.columns}
         data={scripts}
-        map1={map1}
+        // map1={map1}
         map2={map2}
         currentPage={currentPage}
         sortColumn={sortColumn}

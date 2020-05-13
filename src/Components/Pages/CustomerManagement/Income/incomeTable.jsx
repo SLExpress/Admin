@@ -1,32 +1,24 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
-import {
-  TitleWapper,
-  StyleGrid,
-  StyleColumn,
-} from "../../../Common/CommonStyle";
+import Tables from "../../../Common/tables";
 
 class IncomeTable extends Component {
+  columns = [
+    { date: "paymentDate", label: "Date" },
+    { path: "customer", label: "Customer Name" },
+    { path: "developerId", label: "developer Name" },
+    { path: "payment", label: "Payment (LKR)" },
+  ];
   render() {
+    const { earning, onSort, sortColumn, currentPage } = this.props;
     return (
-      <Grid.Column
-        mobile={13}
-        tablet={13}
-        computer={13}
-        style={{ animation: "fadeIn 1s ease-in" }}
-      >
-        <StyleGrid
-        // style={{ overflowX: "scroll" }}
-        >
-          <Grid.Column mobile={16} tablet={16} computer={16}>
-            <TitleWapper>Income</TitleWapper>
-            <Grid>
-              <Grid.Column mobile={2} tablet={2} computer={2}></Grid.Column>
-              <StyleColumn mobile={12} tablet={12} computer={12}></StyleColumn>
-            </Grid>
-          </Grid.Column>
-        </StyleGrid>
-      </Grid.Column>
+      <Tables
+        columns={this.columns}
+        data={earning}
+        currentPage={currentPage}
+        sortColumn={sortColumn}
+        onSort={onSort}
+      />
     );
   }
 }

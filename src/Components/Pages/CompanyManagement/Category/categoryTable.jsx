@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 
 class CategoryTable extends Component {
   columns = [
+    { date: "addedDate", label: "Date" },
     { path: "name", label: "Category" },
+
     {
       key: "button",
       content: (category) => (

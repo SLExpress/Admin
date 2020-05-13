@@ -7,11 +7,13 @@ import {
   getTickets,
   viewInquiries,
   replyTickets,
+  getEarnings,
 } from "../Service/customerService";
 import auth from "../Service/authAdminService";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import Moment from "react-moment";
 
 const CustomerContext = React.createContext();
 
@@ -26,6 +28,7 @@ class CustomerProvider extends Component {
     sortCusMsg: [],
     sortAdminMsg: [],
     sortAllMsg: [],
+    income: [],
     currentPage: 1,
     pageSize: 5,
     loading: true,
@@ -133,10 +136,22 @@ class CustomerProvider extends Component {
   };
 
   handleCustomerDetails = (customer) => {
-    const singleCustomer = this.state.customers.filter(
-      (c) => c._id == customer._id
-    );
-    this.setState({ singleCustomer });
+    const single = this.state.customers.filter((c) => c._id == customer._id);
+    if (single[0].businessUser) single[0].businessUser = "Yes";
+    else single[0].businessUser = "No";
+    if (single[0].confirmed) single[0].confirmed = "Yes";
+    else single[0].confirmed = "No";
+
+    const singleCustomer = {
+      businessUser: single[0].businessUser,
+      confirmed: single[0].confirmed,
+      email: single[0].email,
+      firstName: single[0].firstName,
+      lastName: single[0].lastName,
+      phone: single[0].phone,
+      username: single[0].username,
+    };
+    this.setState({ singleCustomer, loading: false });
   };
 
   /**
@@ -145,15 +160,14 @@ class CustomerProvider extends Component {
 
   async siteList() {
     const { data: sites } = await getSites();
-
-    // const { data: inquiries } = await viewInquiries(id);
-    // this.setState({ inquiry: inquiries.ticket, loading: false });
     var siteList = sites.map((s) => {
-      var customer = this.state.customers.filter((c) => c._id == s._customerId);
-      console.log("CUS", customer);
+      var cus = this.state.customers.filter((c) => c._id == s.customerId);
+      if (cus.length == 0) cus.firstName = "Not Found";
+      else cus.firstName = cus[0].firstName;
       return {
         createdDate: s.createdDate,
-        customerId: customer.username,
+        // <Moment format="DD/MM/YYYY ">{s.createdDate}</Moment>,
+        customer: cus.firstName,
         id: s.id,
         paid: s.paid,
         price: s.price,
@@ -162,8 +176,10 @@ class CustomerProvider extends Component {
         defaultUrl: s.url.defaultUrl,
       };
     });
-    this.setState({ sites: siteList, loading: false });
-    console.log("SITE", this.state.sites);
+    this.setState({ sites: siteList });
+    // console.log("SITE", this.state.sites);
+    const NewSiteList = _.orderBy(this.state.sites, ["createdDate"], ["desc"]);
+    this.setState({ sites: NewSiteList, loading: false });
   }
 
   // handleSiteDelete = async (site) => {
@@ -245,8 +261,57 @@ class CustomerProvider extends Component {
     }
   };
 
+  handleIncome = async (data) => {
+    console.log("Income data", data);
+    try {
+      const { data: Income } = await getEarnings(data);
+      // console.log("INC", Income[0]);
+      // console.log("ddd", Income[0].payments[0].payment.$numberDecimal);
+      var payments = Income[0].payments.map((i) => {
+        var inc = this.state.customers.filter((c) => c._id == i.customerId);
+        if (inc.length == 0) inc.firstName = "Not Found";
+        else inc.firstName = inc[0].firstName;
+        console.log("paymentsfirstName", inc.firstName);
+
+        return {
+          customer: inc.firstName,
+          developerId: i.developerId,
+          payment: i.payment.$numberDecimal * 2 + ".00",
+          paymentDate: i.paymentDate,
+          purchaseId: i.purchaseId,
+          // customUrl: i.url.customUrl,
+          // defaultUrl: i.url.defaultUrl,
+        };
+      });
+      this.setState({ income: payments });
+      const NewIncomes = _.orderBy(
+        this.state.income,
+        ["paymentDate"],
+        ["desc"]
+      );
+      this.setState({ income: NewIncomes, loading: false });
+      // console.log("payments", this.state.income);
+
+      Swal.fire({
+        icon: "success",
+        title: "Done",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 422)
+        this.setState({ income: [], loading: false });
+      Swal.fire({
+        icon: "error",
+        title: "Invalide Input",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    }
+  };
+
   render() {
-    console.log("cusState", this.state.customers);
+    // console.log("singleCustomer", this.state.singleCustomer);
     return (
       <CustomerContext.Provider
         value={{
@@ -258,9 +323,10 @@ class CustomerProvider extends Component {
           handleSearch: this.handleSearch,
 
           handleCustomerDelete: this.handleCustomerDelete,
-          // handleSiteDelete: this.handleSiteDelete,
+          handleCustomerDetails: this.handleCustomerDetails,
           handleInquiries: this.handleInquiries,
           handleReply: this.handleReply,
+          handleIncome: this.handleIncome,
           setOpen: this.setOpen,
           getOpen: this.getOpen,
         }}

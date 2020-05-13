@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Buttons } from "../../../Common/buttons";
 import { IButton } from "../../../Common/icon";
 import Tables from "../../../Common/tables";
+import { Link } from "react-router-dom";
 
 class CustomerListTable extends Component {
   columns = [
@@ -11,11 +12,13 @@ class CustomerListTable extends Component {
     {
       key: "button",
       content: (customer) => (
-        <Buttons
-          onSubmit={() => this.props.onDetails(customer)}
-          name="Details"
-          color="#40a3dc"
-        />
+        <Link to={`/user-details`}>
+          <Buttons
+            onSubmit={() => this.props.onDetails(customer)}
+            name="Details"
+            color="#40a3dc"
+          />
+        </Link>
       ),
     },
 

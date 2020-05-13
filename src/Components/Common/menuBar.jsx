@@ -40,7 +40,9 @@ class MenuBar extends Component {
                         // onClick={() => this.handleItemClick(item)}
                       >
                         {/* {this.setUrl(item.name)} */}
+
                         <Icon circular inverted color="teal" name={item.icon} />
+
                         {item.name}
                       </StyleMenuItem>
                     </Menu.Item>
@@ -66,4 +68,11 @@ const StyleMenuItem = styled(Link)`
   transition: all 0.3s ease-out;
   font-size: 15px;
   font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+  fontfamily: Lato;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: black;
+  }
 `;

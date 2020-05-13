@@ -78,7 +78,15 @@ class CompanyProvider extends Component {
 
   async categoryList() {
     const { data: categories } = await getCategories();
-    this.setState({ categories: categories.categories, loading: false });
+
+    this.setState({ categories: categories.categories });
+    const NewCategories = _.orderBy(
+      this.state.categories,
+      ["addedDate"],
+      ["desc"]
+    );
+    this.setState({ categories: NewCategories, loading: false });
+    // this.setState({ categories: categories.categories, loading: false });
   }
 
   handleCategoryDelete = async (category) => {
@@ -268,7 +276,7 @@ class CompanyProvider extends Component {
   }
 
   render() {
-    console.log("bread", this.state.breadcrumb);
+    console.log("categories", this.state.categories);
     return (
       <CompanyContext.Provider
         value={{

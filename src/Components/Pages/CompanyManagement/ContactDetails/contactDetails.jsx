@@ -82,7 +82,12 @@ class ContactDetails extends Forms {
               <TitleWapper>Contact Details</TitleWapper>
               <Grid>
                 <Grid.Column mobile={4} tablet={4} computer={4}></Grid.Column>
-                <StyleColumn mobile={8} tablet={8} computer={8}>
+                <StyleColumn
+                  mobile={8}
+                  tablet={8}
+                  computer={8}
+                  style={{ marginBottom: "15rem" }}
+                >
                   <StyledForm onSubmit={this.handleSubmit}>
                     {this.renderInput("phone", "Phone")}
                     {this.renderInput("address", "Address")}

@@ -65,3 +65,13 @@ export function replyTickets(msg, id) {
   const data = { reply: msg, ticketId: id };
   return http.put(apiEndpoint + "/" + "ticketReply", data);
 }
+
+/**
+ * Get Earnings
+ */
+
+export function getEarnings(period) {
+  console.log("ticketid", period);
+  const data = { month: period.month, year: period.year };
+  return http.post(apiEndpoint + "/" + "getEarnings", data);
+}

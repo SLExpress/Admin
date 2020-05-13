@@ -5,12 +5,45 @@ import {
   StyleGrid,
   StyleColumn,
 } from "../../../Common/CommonStyle";
-import styled from "styled-components";
+import { CustomerContext } from "../../../../context/customersContext";
 import IncomeForm from "./incomeForm";
 import IncomeTable from "./incomeTable";
+import Pagination from "../../../Common/pagination";
+import { paginate } from "../../../Common/paginate";
+import { SearchBar, Loading } from "../../../Common/icon";
+import _ from "lodash";
 
 class Income extends Component {
+  static contextType = CustomerContext;
+
   render() {
+    const {
+      income,
+      handlePageChange,
+      handlePreviousPageChange,
+      handleNextPageChange,
+      handleSort,
+      loading,
+      currentPage,
+      pageSize,
+      searchQuery,
+      handleSearch,
+      sortColumn,
+    } = this.context;
+
+    const { length: count } = income;
+
+    let filtered = income;
+    if (searchQuery)
+      filtered = income.filter((i) =>
+        i.customer.toLowerCase().startsWith(searchQuery.toLowerCase())
+      );
+    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+    const allIncome = paginate(sorted, currentPage, pageSize);
+    const { length: totalCount } = filtered;
+    if (loading) {
+      return <Loading />;
+    }
     return (
       <Grid.Column
         mobile={13}
@@ -32,6 +65,26 @@ class Income extends Component {
                 style={{ marginBottom: "15rem" }}
               >
                 <IncomeForm />
+
+                {income && (
+                  <>
+                    <IncomeTable
+                      earning={allIncome}
+                      currentPage={currentPage}
+                      sortColumn={sortColumn}
+                      onSort={handleSort}
+                    />
+
+                    <Pagination
+                      itemCount={totalCount}
+                      pageSize={pageSize}
+                      currentPage={currentPage}
+                      onPreviousPageChange={handlePreviousPageChange}
+                      onPageChange={handlePageChange}
+                      onNextPageChange={handleNextPageChange}
+                    />
+                  </>
+                )}
               </StyleColumn>
             </Grid>
           </Grid.Column>

@@ -53,7 +53,7 @@ class BusinessUserProvider extends Component {
 
   async businessUserList() {
     const { data: businessUsers } = await getBusinessUsers();
-    console.log("hh", businessUsers.customers);
+    // console.log("hh", businessUsers.customers);
     this.setState({ businessUsers: businessUsers.customers, loading: false });
   }
 
@@ -72,7 +72,7 @@ class BusinessUserProvider extends Component {
   };
 
   render() {
-    console.log("hh", this.state.businessUsers);
+    // console.log("hh", this.state.businessUsers);
     return (
       <BusinessUserContext.Provider
         value={{

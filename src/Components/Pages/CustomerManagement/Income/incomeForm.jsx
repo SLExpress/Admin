@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Form } from "semantic-ui-react";
+import { Grid, Form, Segment } from "semantic-ui-react";
 import {
   TitleWapper,
   StyleGrid,
@@ -28,23 +28,10 @@ class IncomeForm extends Forms {
     try {
       // const { data } = this.state;
       await this.context.handleIncome(this.state.data);
-      Swal.fire({
-        icon: "success",
-        title: "Done",
-        showConfirmButton: false,
-        timer: 1000,
-      });
-
       const { state } = this.props.location;
       window.location = state ? state.from.pathname : "/income";
     } catch (ex) {
-      Swal.fire({
-        icon: "error",
-        title: "Invalide Input",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      if (ex.response && ex.response.status === 400) {
+      if (ex.response && ex.response.status === 422) {
         const errors = { ...this.state.errors };
         errors.year = ex.response.data;
         this.setState({ errors });
@@ -54,26 +41,47 @@ class IncomeForm extends Forms {
 
   render() {
     return (
-      <Grid.Column
-        mobile={13}
-        tablet={13}
-        computer={13}
-        style={{ animation: "fadeIn 1s ease-in" }}
-      >
-        <Grid.Column mobile={16} tablet={16} computer={16}>
+      // <Grid.Column
+      //   mobile={13}
+      //   tablet={13}
+      //   computer={13}
+      //   style={{ animation: "fadeIn 1s ease-in" }}
+      // >
+      //   <Grid.Column mobile={16} tablet={16} computer={16}>
+      //     <Grid>
+      //       <Grid.Column mobile={2} tablet={2} computer={2}></Grid.Column>
+      //       <StyleColumn mobile={12} tablet={12} computer={12}>
+      <Segment>
+        <StyledForm onSubmit={this.handleSubmit}>
           <Grid>
+            <Grid.Column
+              mobile={7}
+              tablet={7}
+              computer={7}
+              // style={{ background: "red" }}
+            >
+              {this.renderInput("month", "Month")}
+            </Grid.Column>
+            {/* </Grid>
+        <Grid> */}
             <Grid.Column mobile={2} tablet={2} computer={2}></Grid.Column>
-            <StyleColumn mobile={12} tablet={12} computer={12}>
-              <StyledForm onSubmit={this.handleSubmit}>
-                {this.renderInput("month", "Month")}
-                {this.renderInput("year", "Year")}
-
-                <CButtons name="Check" color="#40a3dc" />
-              </StyledForm>
-            </StyleColumn>
+            <Grid.Column
+              mobile={7}
+              tablet={7}
+              computer={7}
+              // style={{ background: "green" }}
+            >
+              {this.renderInput("year", "Year")}
+            </Grid.Column>
           </Grid>
-        </Grid.Column>
-      </Grid.Column>
+          <br />
+          <CButtons name="Check" color="#40a3dc" />
+        </StyledForm>
+      </Segment>
+      //       </StyleColumn>
+      //     </Grid>
+      //   </Grid.Column>
+      // </Grid.Column>
     );
   }
 }

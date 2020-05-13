@@ -36,35 +36,35 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/Dashboard" component={Dashboard} />
-      <Route path="/Company-Details" component={CompanyDetails} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/about-us" component={CompanyDetails} />
       {/* <Route path="/Company-Details/:id" component={CompanyDetailsForm} /> */}
-      <Route path="/Contact-Details" component={ContactDetails} />
-      <Route path="/Category/:id" component={CategoryForm} />
-      <Route path="/Terms-Of-Services" component={TermsOfServices} />
-      <Route path="/Category" component={Category} />
-      <Route path="/Admin-Sign-In" component={AdminSignIn} />
-      <Route path="/LogOut" component={LogOut} />
-      <Route path="/Admin-Sign-Up" component={AdminSignUp} />
+      <Route path="/Contact-us" component={ContactDetails} />
+      <Route path="/category/:id" component={CategoryForm} />
+      <Route path="/terms-of-services" component={TermsOfServices} />
+      <Route path="/categories" component={Category} />
+      <Route path="/admin-sign-in" component={AdminSignIn} />
+      <Route path="/log-out" component={LogOut} />
+      <Route path="/admin-sign-up" component={AdminSignUp} />
 
-      <Route path="/User-List" component={CustomerList} />
-      <Route path="/Site-List" component={SiteList} />
-      <Route path="/Domain-List" component={DomainList} />
-      <Route path="/Customer-Tickets" component={CustomerTickets} />
-      <Route path="/Customer-Inquiries/:id" component={CustomerInquiries} />
-      <Route path="/Income" component={Income} />
-      <Route path="/UserDetails" component={UserDetails} />
+      <Route path="/user-list" component={CustomerList} />
+      <Route path="/site-list" component={SiteList} />
+      <Route path="/domain-list" component={DomainList} />
+      <Route path="/customer-tickets" component={CustomerTickets} />
+      <Route path="/customer-inquiries/:id" component={CustomerInquiries} />
+      <Route path="/income" component={Income} />
+      <Route path="/user-details" component={UserDetails} />
 
-      <Route path="/Developer-List" component={DeveloperList} />
-      <Route path="/Script-List" component={ScriptList} />
-      <Route path="/Payment/:id" component={PaymentForm} />
-      <Route path="/Payment" component={Payment} />
-      <Route path="/Developer-Tickets" component={DeveloperTickets} />
-      <Route path="/Developer-Inquiries/:id" component={DeveloperInquiries} />
+      <Route path="/developer-list" component={DeveloperList} />
+      <Route path="/script-list" component={ScriptList} />
+      <Route path="/payment/:id" component={PaymentForm} />
+      <Route path="/payment" component={Payment} />
+      <Route path="/developer-tickets" component={DeveloperTickets} />
+      <Route path="/developer-inquiries/:id" component={DeveloperInquiries} />
 
-      <Route path="/Business-User-List" component={BusinessUserList} />
-      <Route path="/Question-Adding" component={QuestionsAdding} />
-      <Route path="/Question-List" component={QuestionList} />
+      <Route path="/business-user-list" component={BusinessUserList} />
+      <Route path="/question-adding" component={QuestionsAdding} />
+      <Route path="/question-list" component={QuestionList} />
     </Switch>
   );
 };

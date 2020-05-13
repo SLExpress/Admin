@@ -11,14 +11,16 @@ const Tables = ({
   map1,
   map2,
   currentPage,
+  id,
 }) => {
+  // console.log("DEVS", col);
   return (
     <Table basic="very">
       <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />
       <TableBody
         columns={columns}
         data={data}
-        // map1={map1}
+        id={id}
         map2={map2}
         currentPage={currentPage}
       />

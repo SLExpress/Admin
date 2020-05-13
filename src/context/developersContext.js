@@ -133,12 +133,13 @@ class DeveloperProvider extends Component {
 
     var scr = scriptList.scripts.map((s) => {
       var dev = this.state.developers.filter((d) => d._id == s.developer);
-      // console.log("CUS", dev[0].firstName);
+      if (dev.length == 0) dev.firstName = "Not Found";
+      else dev.firstName = dev[0].firstName;
       return {
         addedDate: s.addedDate,
         approved: s.approved,
         description: s.description,
-        developer: dev[0].firstName,
+        developer: dev.firstName,
         id: s.id,
         image: s.image,
         name: s.name,
@@ -146,8 +147,10 @@ class DeveloperProvider extends Component {
         size: s.size,
       };
     });
-
-    this.setState({ scripts: scr, loading: false });
+    this.setState({ scripts: scr });
+    const NewScripts = _.orderBy(this.state.scripts, ["addedDate"], ["desc"]);
+    this.setState({ scripts: NewScripts, loading: false });
+    // this.setState({ scripts: scr, loading: false });
     this.setState({ buyers: scriptList.scriptCustomers });
   }
 
@@ -263,7 +266,7 @@ class DeveloperProvider extends Component {
   };
 
   render() {
-    // console.log("SCRIPTS", this.state.scripts);
+    console.log("SCRIPTS", this.state.scripts);
     //console.log("moment2", moment("2020-04-01T19:34:07.418Z").unix());
     //  console.log("buyersssss", this.state.buyers);
     return (

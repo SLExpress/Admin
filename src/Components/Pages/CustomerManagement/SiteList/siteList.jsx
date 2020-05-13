@@ -45,7 +45,7 @@ class SiteList extends Component {
     if (loading) {
       return <Loading />;
     }
-    console.log("siteList", sites);
+    console.log("allSites", allSites);
     return (
       <Grid.Column
         mobile={13}

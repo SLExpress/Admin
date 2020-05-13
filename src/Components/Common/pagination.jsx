@@ -3,15 +3,17 @@ import { Table, Icon, Menu } from "semantic-ui-react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 
-const Pagination = props => {
+const Pagination = (props) => {
   const {
     itemCount,
     pageSize,
     currentPage,
     onPreviousPageChange,
     onPageChange,
-    onNextPageChange
+    onNextPageChange,
   } = props;
+
+  console.log("currentPage", currentPage);
 
   const pageCount = Math.ceil(itemCount / pageSize);
   if (pageCount === 1) return null;
@@ -31,7 +33,7 @@ const Pagination = props => {
                 <Icon name="chevron left" />
               </Menu.Item>
             )}
-            {pages.map(page => (
+            {pages.map((page) => (
               <Menu.Item as="a" key={page} onClick={() => onPageChange(page)}>
                 {page}
               </Menu.Item>
@@ -56,6 +58,6 @@ Pagination.propTypes = {
   itemCount: PropTypes.number.isRequired,
   pageSize: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired
+  onPageChange: PropTypes.func.isRequired,
 };
 export default Pagination;

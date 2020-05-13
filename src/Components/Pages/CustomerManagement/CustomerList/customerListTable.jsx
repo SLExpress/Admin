@@ -3,8 +3,16 @@ import { Buttons } from "../../../Common/buttons";
 import { IButton } from "../../../Common/icon";
 import Tables from "../../../Common/tables";
 import { Link } from "react-router-dom";
+import { DeveloperContext } from "../../../../context/developersContext";
 
 class CustomerListTable extends Component {
+  static contextType = DeveloperContext;
+
+  myFunction(customer) {
+    this.props.onDetails(customer);
+    this.props.onPurchases(customer);
+    this.context.handleWebsites(customer);
+  }
   columns = [
     { path: "username", label: "Username" },
     { path: "email", label: "E-mail" },
@@ -14,7 +22,8 @@ class CustomerListTable extends Component {
       content: (customer) => (
         <Link to={`/user-details`}>
           <Buttons
-            onSubmit={() => this.props.onDetails(customer)}
+            // onSubmit={() => this.props.onDetails(customer)}
+            onSubmit={() => this.myFunction(customer)}
             name="Details"
             color="#40a3dc"
           />

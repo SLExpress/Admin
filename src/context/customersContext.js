@@ -22,6 +22,7 @@ class CustomerProvider extends Component {
     customers: [],
     singleCustomer: "",
     sites: [],
+    purchases: [],
     tickets: [],
     inquiry: [],
     cusMsg: [],
@@ -136,6 +137,7 @@ class CustomerProvider extends Component {
   };
 
   handleCustomerDetails = (customer) => {
+    console.log("cus", customer);
     const single = this.state.customers.filter((c) => c._id == customer._id);
     if (single[0].businessUser) single[0].businessUser = "Yes";
     else single[0].businessUser = "No";
@@ -154,14 +156,58 @@ class CustomerProvider extends Component {
     this.setState({ singleCustomer, loading: false });
   };
 
+  handlePurchases = (customer) => {
+    // console.log("customer", customer);
+    var purchases = customer.websites.map((w) => {
+      const pur = this.state.sites.filter((s) => s.id == w);
+      if (pur.length == 0) {
+        pur.createdDate = "Not Found";
+        pur.customUrl = "Not Found";
+        pur.customer = "Not Found";
+        pur.defaultUrl = "Not Found";
+        pur.id = w;
+        pur.paid = "Not Found";
+        pur.price = "Not Found";
+        pur.scriptId = "Not Found";
+      } else {
+        pur.createdDate = pur[0].createdDate;
+        pur.customUrl = pur[0].customUrl;
+        pur.customer = pur[0].customer;
+        pur.defaultUrl = pur[0].defaultUrl;
+        pur.id = pur[0].id;
+        pur.paid = pur[0].paid;
+        pur.price = pur[0].price;
+        pur.scriptId = pur[0].scriptId;
+      }
+
+      if (pur.paid) pur.paid = "Yes";
+      else pur.paid = "No";
+      console.log("pur", pur.createdDate);
+      return {
+        createdDate: pur.createdDate,
+        customUrl: pur.customUrl,
+        customer: pur.customer,
+        defaultUrl: pur.defaultUrl,
+        websiteId: pur.id,
+        paid: pur.paid,
+        price: pur.price,
+        scriptId: pur.scriptId,
+      };
+    });
+    this.setState({ purchases, loading: false });
+    // console.log("Purchases", purchases);
+  };
+
   /**
    * Sites List
    */
 
   async siteList() {
     const { data: sites } = await getSites();
+
     var siteList = sites.map((s) => {
       var cus = this.state.customers.filter((c) => c._id == s.customerId);
+      // var web = this.state.sites.filter((w) => c._id == s.customerId);
       if (cus.length == 0) cus.firstName = "Not Found";
       else cus.firstName = cus[0].firstName;
       return {
@@ -311,7 +357,7 @@ class CustomerProvider extends Component {
   };
 
   render() {
-    // console.log("singleCustomer", this.state.singleCustomer);
+    console.log("currentPage", this.state.currentPage);
     return (
       <CustomerContext.Provider
         value={{
@@ -324,6 +370,7 @@ class CustomerProvider extends Component {
 
           handleCustomerDelete: this.handleCustomerDelete,
           handleCustomerDetails: this.handleCustomerDetails,
+          handlePurchases: this.handlePurchases,
           handleInquiries: this.handleInquiries,
           handleReply: this.handleReply,
           handleIncome: this.handleIncome,

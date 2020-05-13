@@ -22,6 +22,7 @@ class DeveloperProvider extends Component {
     developers: [],
     scripts: [],
     buyers: [],
+    webSites: [],
     tickets: [],
     openTicket: "",
     inquiry: [],
@@ -186,23 +187,25 @@ class DeveloperProvider extends Component {
   };
 
   handleDownloadScripts = async (script) => {
-    //  console.log("scriptid", script.id);
     try {
-      // const res =
       await downloadScript(script.id);
-      // if (res.status === 200) {
-      //   res.then(res);
-      //   const url = window.URL.createObjectURL(
-      //     new Blob([res.data], { type: "application/zip" })
-      //   );
-      //   const link = document.createElement("a");
-      //   link.href = url;
-      //   link.setAttribute("download", "script.zip");
-      //   document.body.appendChild(link);
-      //   link.click();
-      //   link.parentNode.removeChild(link);
-      // }
     } catch (ex) {}
+  };
+
+  handleWebsites = (customer) => {
+    // console.log("gggcustomer", customer.websites);
+    var webSites = customer.websites.map((w) => {
+      const web = this.state.buyers.filter((b) => b.websiteId == w);
+      console.log(" w.index", web);
+      const webName = this.state.scripts.filter((s) => s.id == web[0].scriptId);
+      return {
+        id: web[0].websiteId,
+        scriptId: web[0].scriptId,
+        name: webName[0].name,
+      };
+    });
+    this.setState({ webSites, loading: false });
+    console.log("ggg", webSites);
   };
 
   /**
@@ -266,9 +269,9 @@ class DeveloperProvider extends Component {
   };
 
   render() {
-    console.log("SCRIPTS", this.state.scripts);
+    console.log("webSites", this.state.webSites);
     //console.log("moment2", moment("2020-04-01T19:34:07.418Z").unix());
-    //  console.log("buyersssss", this.state.buyers);
+    console.log("buyersssss", this.state.buyers);
     return (
       <DeveloperContext.Provider
         value={{
@@ -283,6 +286,7 @@ class DeveloperProvider extends Component {
           handleScriptDelete: this.handleScriptDelete,
           handleApprovel: this.handleApprovel,
           handleDownloadScripts: this.handleDownloadScripts,
+          handleWebsites: this.handleWebsites,
           handleInquiries: this.handleInquiries,
           handleReply: this.handleReply,
         }}

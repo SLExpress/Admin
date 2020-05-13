@@ -74,5 +74,7 @@ const StyleMenuItem = styled(Link)`
   &:hover {
     background: rgba(0, 0, 0, 0.1);
     color: black;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
   }
 `;

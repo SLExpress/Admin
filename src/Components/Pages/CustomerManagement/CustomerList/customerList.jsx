@@ -21,6 +21,7 @@ class CustomerList extends Component {
       customers,
       handleCustomerDelete,
       handleCustomerDetails,
+      handlePurchases,
       handlePageChange,
       handlePreviousPageChange,
       handleNextPageChange,
@@ -80,6 +81,7 @@ class CustomerList extends Component {
                   sortColumn={sortColumn}
                   onDelete={handleCustomerDelete}
                   onDetails={handleCustomerDetails}
+                  onPurchases={handlePurchases}
                   onSort={handleSort}
                 />
 

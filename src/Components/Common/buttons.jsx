@@ -43,8 +43,8 @@ const ButtonStyle = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-color: ${props => props.color};
-  color: ${props => props.color};
+  border-color: ${(props) => props.color};
+  color: ${(props) => props.color};
 
   &:focus {
     outline: none;
@@ -52,7 +52,7 @@ const ButtonStyle = styled.button`
 
   &:hover {
     color: #fff;
-    background-color: ${props => props.color};
+    background-color: ${(props) => props.color};
   }
 `;
 
@@ -66,8 +66,8 @@ const ButtonWapper = styled.button`
   margin: 7px;
   justify-content: center;
   align-items: center;
-  border-color: ${props => props.color};
-  color: ${props => props.color};
+  border-color: ${(props) => props.color};
+  color: ${(props) => props.color};
 
   &:focus {
     outline: none;
@@ -75,6 +75,6 @@ const ButtonWapper = styled.button`
 
   &:hover {
     color: #fff;
-    background-color: ${props => props.color};
+    background-color: ${(props) => props.color};
   }
 `;

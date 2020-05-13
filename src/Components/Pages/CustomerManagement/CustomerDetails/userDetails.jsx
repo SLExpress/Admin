@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Divider, Segment, Item, Form, Icon } from "semantic-ui-react";
 import ButtonGroup from "./buttonGroup";
-//import UserListContainer from "../../../../Containers/UserList.container";
 import styled from "styled-components";
 import {
   TitleWapper,
@@ -12,6 +11,7 @@ import { Buttons } from "../../../Common/buttons";
 import { Link } from "react-router-dom";
 import Items from "../../../Common/item";
 import { CustomerContext } from "../../../../context/customersContext";
+import CustomerPurchases from "./customerPurchases";
 
 class UserDetails extends Component {
   static contextType = CustomerContext;
@@ -46,7 +46,9 @@ class UserDetails extends Component {
                         <Buttons name="Back" color="#40a3dc" />
                       </Link>
                     </Grid.Column>
-                    <Grid.Column>dddd</Grid.Column>
+                    <Grid.Column>
+                      <CustomerPurchases />
+                    </Grid.Column>
                   </Grid>
 
                   <Divider vertical>And</Divider>

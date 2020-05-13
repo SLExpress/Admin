@@ -4,35 +4,7 @@ import { Status } from "../../../Common/icon";
 import { DeveloperContext } from "../../../../context/developersContext";
 
 class SiteListTable extends Component {
-  // state = {
-  //   site: [],
-  // };
   static contextType = DeveloperContext;
-
-  // renderDev() {
-  // siteList = this.props.sites.map((site) => {
-  //   var scr = this.context.scripts.filter(
-  //     (script) => script.id == site.scriptId
-  //   );
-  //   if (scr.length == 0) scr.name = "Not Found";
-  //   else scr.name = scr[0].name;
-  //   return [
-  //     { createdDate: site.createdDate },
-  //     { customer: site.customer },
-  //     { id: site.id },
-  //     { paid: site.paid },
-  //     { price: site.price },
-  //     { scriptName:  this.context.scripts.filter(
-  //       (script) => script.id == site.scriptId
-  //     )},
-  //     { customUrl: site.customUrl },
-  //     { defaultUrl: site.defaultUrl },
-  //   ];
-  // });
-  // return siteList;
-  // console.log("dfdfdf", siteList);
-  // this.setState({ site: siteList });
-  // }
 
   columns = [
     { date: "createdDate", label: "Date" },

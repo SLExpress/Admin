@@ -9,12 +9,13 @@ class Items extends Component {
 
     return (
       <Item.Group>
-        <Item>
+        <Item style={{ margin: "2rem" }}>
           <Item.Content style={{ fontFamily: "Helvetica" }}>
-            <Item.Header as="a">{header} </Item.Header>
+            <Item.Header>{header} </Item.Header>
+            <br /> <br />
             {entries.map((key) => (
               <Grid>
-                <Grid.Column mobile={3} tablet={3} computer={3}>
+                <Grid.Column mobile={4} tablet={4} computer={4}>
                   <Item.Meta>{key[0]}</Item.Meta>
                 </Grid.Column>
                 <Grid.Column mobile={8} tablet={8} computer={8}>

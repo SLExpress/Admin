@@ -3,7 +3,11 @@ import { Grid, Divider, Segment, Item, Form, Icon } from "semantic-ui-react";
 import ButtonGroup from "./buttonGroup";
 //import UserListContainer from "../../../../Containers/UserList.container";
 import styled from "styled-components";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import {
+  TitleWapper,
+  StyleGrid,
+  StyleColumn,
+} from "../../../Common/CommonStyle";
 import { Buttons } from "../../../Common/buttons";
 import { Link } from "react-router-dom";
 import Items from "../../../Common/item";
@@ -20,23 +24,37 @@ class UserDetails extends Component {
         mobile={13}
         tablet={13}
         computer={13}
-        // style={{ background: "green" }}
+        style={{ animation: "fadeIn 1s ease-in" }}
       >
-        <TitleWapper>User Details</TitleWapper>
-        <ButtonGroup />
-        <Segment>
-          <Grid columns={2} relaxed="very">
-            <Grid.Column>
-              <Items data={singleCustomer} header="Personal Details" />
-              <Link to="User-List">
-                <Buttons name="Back" color="#40a3dc" />
-              </Link>
-            </Grid.Column>
-            <Grid.Column>dddd</Grid.Column>
-          </Grid>
+        <StyleGrid>
+          <Grid.Column mobile={16} tablet={16} computer={16}>
+            <TitleWapper>User Details</TitleWapper>
+            <Grid>
+              <Grid.Column mobile={1} tablet={1} computer={1}></Grid.Column>
+              <StyleColumn
+                mobile={14}
+                tablet={14}
+                computer={14}
+                style={{ marginBottom: "15rem" }}
+              >
+                <ButtonGroup />
+                <Segment>
+                  <Grid columns={2} relaxed="very">
+                    <Grid.Column>
+                      <Items data={singleCustomer} header="Personal Details" />
+                      <Link to="User-List">
+                        <Buttons name="Back" color="#40a3dc" />
+                      </Link>
+                    </Grid.Column>
+                    <Grid.Column>dddd</Grid.Column>
+                  </Grid>
 
-          <Divider vertical>And</Divider>
-        </Segment>
+                  <Divider vertical>And</Divider>
+                </Segment>
+              </StyleColumn>
+            </Grid>
+          </Grid.Column>
+        </StyleGrid>
       </Grid.Column>
     );
   }

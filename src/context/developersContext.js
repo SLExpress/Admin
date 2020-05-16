@@ -9,11 +9,13 @@ import {
   getTickets,
   viewInquiries,
   replyTickets,
+  getPurchase,
 } from "../Service/developerService";
 import auth from "../Service/authAdminService";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import Moment from "react-moment";
 
 const DeveloperContext = React.createContext();
 
@@ -29,6 +31,7 @@ class DeveloperProvider extends Component {
     sortDevMsg: [],
     sortAdminMsg: [],
     sortAllMsg: [],
+    singlePurchase: "",
     currentPage: 1,
     pageSize: 5,
     loading: true,
@@ -268,10 +271,48 @@ class DeveloperProvider extends Component {
     }
   };
 
+  handlePurchase = async (data) => {
+    try {
+      const { data: purchase } = await getPurchase(data.purchaseId);
+      console.log("data", purchase);
+
+      // var webSites = customer.websites.map((w) => {
+      const web = this.state.buyers.filter(
+        (b) => b.websiteId == purchase.payhereOrder
+      );
+      // console.log(" payhereOrder", web);
+      const webName = this.state.scripts.filter((s) => s.id == web[0].scriptId);
+      console.log(" webName", webName[0].name);
+      // return {
+      //   id: web[0].websiteId,
+      //   scriptId: web[0].scriptId,
+      //   name: webName[0].name,
+      // };
+      // });
+
+      const singlePurchase = {
+        Date: <Moment format="DD/MM/YYYY ">{purchase.date}</Moment>,
+        Site_Name: webName[0].name,
+        Developer: webName[0].developer,
+        Description: webName[0].description,
+        Payment_No: purchase.payherePayment,
+        Amount: purchase.payment.amount.$numberDecimal,
+        // lastName: purchase.lastName,
+        // phone: purchase.phone,
+        // username: purchase.username,
+      };
+      this.setState({ singlePurchase, loading: false });
+      // this.setState({ singleCustomer, loading: false });
+    } catch (ex) {
+      // if (ex.response && ex.response.status === 404)
+      //   toast.error("Something Wrong..!");
+    }
+  };
+
   render() {
     console.log("webSites", this.state.webSites);
     //console.log("moment2", moment("2020-04-01T19:34:07.418Z").unix());
-    console.log("buyersssss", this.state.buyers);
+    console.log("SinglePurchase", this.state.singlePurchase);
     return (
       <DeveloperContext.Provider
         value={{
@@ -289,6 +330,7 @@ class DeveloperProvider extends Component {
           handleWebsites: this.handleWebsites,
           handleInquiries: this.handleInquiries,
           handleReply: this.handleReply,
+          handlePurchase: this.handlePurchase,
         }}
       >
         {this.props.children}

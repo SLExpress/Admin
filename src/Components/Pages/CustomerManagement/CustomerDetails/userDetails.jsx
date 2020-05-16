@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Divider, Segment, Item, Form, Icon } from "semantic-ui-react";
+import { Grid, Divider, Segment, Item, Form, Image } from "semantic-ui-react";
 // import ButtonGroup from "./buttonGroup";
 import styled from "styled-components";
 import {
@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import Items from "../../../Common/item";
 import { CustomerContext } from "../../../../context/customersContext";
 import CustomerPurchases from "./customerPurchases";
+import { IButton } from "./../../../Common/icon";
 
 class UserDetails extends Component {
   static contextType = CustomerContext;
@@ -44,9 +45,14 @@ class UserDetails extends Component {
                 <Segment>
                   <Grid columns={2} relaxed="very">
                     <Grid.Column>
+                      <Image
+                        src="https://react.semantic-ui.com/images/avatar/large/stevie.jpg"
+                        size="small"
+                        circular
+                      />
                       <Items data={singleCustomer} header="Personal Details" />
                       <Link to="User-List">
-                        <Buttons name="Back" color="#40a3dc" />
+                        <IButton name="angle double left" />
                       </Link>
                     </Grid.Column>
                     <Grid.Column>

@@ -16,8 +16,8 @@ class CustomerDetailsTable extends Component {
   render() {
     const { purchases, onSort, sortColumn, currentPage } = this.props;
     const { webSites } = this.context;
-    console.log("PurchasesDD", purchases);
-    console.log("webSitesDD", webSites);
+    // console.log("PurchasesDD", purchases);
+    // console.log("webSitesDD", webSites);
     return (
       <Tables
         columns={this.columns}

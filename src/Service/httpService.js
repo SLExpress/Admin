@@ -30,7 +30,7 @@ axios.interceptors.response.use(null, (error) => {
 //   headers: {
 //     "Content-Type": "application/json",
 //     Authorization:
-//       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWI2NTE0MTIzYzExNDJlY2I0ZGE1ZWQiLCJlbWFpbCI6ImNjY2NAZ21haWwuY29tIiwiaWF0IjoxNTg5NjIxMzQwLCJleHAiOjE1ODk2MjQ5NDB9.am3u_BOXj19zuiyGFDD6zqphPA9uyFIu-NNtSN_3NO4",
+//       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWI2NTE0MTIzYzExNDJlY2I0ZGE1ZWQiLCJlbWFpbCI6ImNjY2NAZ21haWwuY29tIiwiaWF0IjoxNTg5NjQwNjExLCJleHAiOjE1ODk2NDQyMTF9.TIlrPsYb1hpfqNN6iPohgZmD8dGp4qb50jREc6iD-uE",
 //   },
 // })
 //   .then((response) => console.log(response))

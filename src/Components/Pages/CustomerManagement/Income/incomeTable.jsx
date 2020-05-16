@@ -2,24 +2,26 @@ import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 import Tables from "../../../Common/tables";
 import { Link } from "react-router-dom";
+import { DeveloperContext } from "../../../../context/developersContext";
 
 class IncomeTable extends Component {
+  static contextType = DeveloperContext;
+
   columns = [
     { date: "paymentDate", label: "Date" },
-    { path: "firstName", label: "Customer Name" },
+    { path: "customer", label: "Customer Name" },
+    // { path: "customerId", label: "Customer Name" },
     // { path: "developerId", label: "developer Name" },
     { path: "payment", label: "Payment (LKR)" },
+    // { path: "purchaseId", label: "PurchaseId" },
     {
       key: "link",
       content: (income) => (
-        <Link to={{ pathname: `/income-summary`, incomes: income }}>
+        <Link
+          to={{ pathname: `/income-summary`, incomes: income }}
+          onClick={() => this.context.handlePurchase(income)}
+        >
           more...
-          {/* <Buttons
-             onSubmit={() => this.props.onDetails(customer)}
-            onSubmit={() => this.myFunction(customer)}
-            name="Details"
-            color="#40a3dc"
-          />  */}
         </Link>
       ),
     },

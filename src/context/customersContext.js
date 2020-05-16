@@ -30,6 +30,7 @@ class CustomerProvider extends Component {
     sortAdminMsg: [],
     sortAllMsg: [],
     income: [],
+    singleIncome: "",
     currentPage: 1,
     pageSize: 5,
     loading: true,
@@ -123,17 +124,6 @@ class CustomerProvider extends Component {
           );
         }
       });
-    // const customers = this.state.customers.filter(
-    //   (d) => d._id !== customer._id
-    // );
-    // this.setState({ customers });
-
-    // try {
-    //   await deleteCustomer(customer._id);
-    // } catch (ex) {
-    //   if (ex.response && ex.response.status === 404)
-    //     toast.error("This site has already been deleted.");
-    // }
   };
 
   handleCustomerDetails = (customer) => {
@@ -141,17 +131,17 @@ class CustomerProvider extends Component {
     const single = this.state.customers.filter((c) => c._id == customer._id);
     if (single[0].businessUser) single[0].businessUser = "Yes";
     else single[0].businessUser = "No";
-    if (single[0].confirmed) single[0].confirmed = "Yes";
-    else single[0].confirmed = "No";
+    if (single[0].confirmed) single[0].confirmed = "Confirmed";
+    else single[0].confirmed = "Not Confirmed";
 
     const singleCustomer = {
-      businessUser: single[0].businessUser,
-      confirmed: single[0].confirmed,
-      email: single[0].email,
-      firstName: single[0].firstName,
-      lastName: single[0].lastName,
-      phone: single[0].phone,
-      username: single[0].username,
+      BusinessUser: single[0].businessUser,
+      Confirmed: single[0].confirmed,
+      Email: single[0].email,
+      First_Name: single[0].firstName,
+      Last_Name: single[0].lastName,
+      Phone: single[0].phone,
+      Username: single[0].username,
     };
     this.setState({ singleCustomer, loading: false });
   };
@@ -312,64 +302,41 @@ class CustomerProvider extends Component {
     try {
       const { data: income } = await getEarnings(data);
 
-      console.log("INC", income);
+      // console.log("INC", income);
       // console.log("ddd", Income[0].payments[0].payment.$numberDecimal);
       var payments = income.map((i) => {
-        console.log("INCMAP", i);
+        // console.log("INCMAP", i);
         var inc = this.state.customers.filter(
           (c) => c._id == i.payments[0].customerId
         );
+        if (inc[0].businessUser) inc[0].businessUser = "Yes";
+        else inc[0].businessUser = "No";
+        if (inc[0].confirmed) inc[0].confirmed = "Confirmed";
+        else inc[0].confirmed = "Not Confirmed";
         console.log("inc", inc[0]);
         if (inc.length == 0) {
-          // inc.customer = i.payments[0].customerId;
-          // inc.developerId = i.payments[0].developerId;
+          inc.customer = i.payments[0].customerId;
+          inc.customerId = i.payments[0].customerId;
+          inc.developerId = i.payments[0].developerId;
           inc.payment = i.payments[0].payment.$numberDecimal * 2 + ".00";
           inc.paymentDate = i.payments[0].paymentDate;
-          // inc.purchaseId = i.payments[0].purchaseId;
-          inc.businessUser = "Not Found";
-          inc.confirmed = "Not Found";
-          inc.email = "Not Found";
-          inc.firstName = i.payments[0].customerId;
-          inc.lastName = "Not Found";
-          inc.phone = "Not Found";
-          inc.username = "Not Found";
-          // inc.customUrl = "Not Found";
-          // inc.defaultUrl = "Not Found";
+          inc.purchaseId = i.payments[0].purchaseId;
         } else {
-          // inc.customer = inc[0].firstName;
-          // inc.developerId = i.payments[0].developerId;
+          inc.customer = inc[0].firstName;
+          inc.customerId = i.payments[0].customerId;
+          inc.developerId = i.payments[0].developerId;
           inc.payment = i.payments[0].payment.$numberDecimal * 2 + ".00";
           inc.paymentDate = i.payments[0].paymentDate;
-          // inc.purchaseId = i.payments[0].purchaseId;
-          inc.businessUser = inc[0].businessUser;
-          inc.confirmed = inc[0].confirmed;
-          inc.email = inc[0].email;
-          inc.firstName = inc[0].firstName;
-          inc.lastName = inc[0].lastName;
-          inc.phone = inc[0].phone;
-          inc.username = inc[0].username;
-          // inc.customUrl = inc[0].customUrl;
-          // inc.defaultUrl = inc[0].defaultUrl;
+          inc.purchaseId = i.payments[0].purchaseId;
         }
-        // if (inc.length == 0) inc[0].firstName = "Not Found";
-        // else inc[0].firstName = inc[0].firstName;
-        // console.log("paymentsfirstName", inc.firstName);
 
         return {
-          // customer: inc.customer,
-          // developerId: inc.developerId,
+          customer: inc.customer,
+          customerId: inc.customerId,
+          developerId: inc.developerId,
           payment: inc.payment,
           paymentDate: inc.paymentDate,
-          // purchaseId: inc.purchaseId,
-          businessUser: inc.businessUser,
-          confirmed: inc.confirmed,
-          email: inc.email,
-          firstName: inc.firstName,
-          lastName: inc.lastName,
-          phone: inc.phone,
-          username: inc.username,
-          // customUrl: inc.url.customUrl,
-          // defaultUrl: inc.url.defaultUrl,
+          purchaseId: inc.purchaseId,
         };
       });
       console.log("payments", payments);
@@ -400,8 +367,45 @@ class CustomerProvider extends Component {
     }
   };
 
+  handleIncomeDetails = async (data) => {
+    // console.log("SUMMARY", data);
+    var incomeDetails = this.state.customers.filter(
+      (c) => c._id == data.customerId
+    );
+    console.log("incomeDetails", incomeDetails.businessUser);
+    if (incomeDetails[0].businessUser) incomeDetails[0].businessUser = "Yes";
+    else incomeDetails[0].businessUser = "No";
+
+    if (incomeDetails[0].confirmed) incomeDetails[0].confirmed = "Yes";
+    else incomeDetails[0].confirmed = "No";
+
+    if (incomeDetails.length == 0) {
+      incomeDetails.businessUser = "Not Found";
+      incomeDetails.confirmed = "Not Found";
+      incomeDetails.email = "Not Found";
+      incomeDetails.firstName = incomeDetails.customerId;
+      incomeDetails.lastName = "Not Found";
+      incomeDetails.phone = "Not Found";
+      incomeDetails.username = "Not Found";
+    } else {
+    }
+
+    const singleIncome = {
+      BusinessUser: incomeDetails[0].businessUser,
+      Confirmed: incomeDetails[0].confirmed,
+      Email: incomeDetails[0].email,
+      First_Name: incomeDetails[0].firstName,
+      Last_Name: incomeDetails[0].lastName,
+      Phone: incomeDetails[0].phone,
+      Username: incomeDetails[0].username,
+    };
+
+    this.setState({ singleIncome, loading: false });
+    console.log("Singlencome", this.state.singleIncome);
+  };
+
   render() {
-    console.log("currentPage", this.state.currentPage);
+    console.log("currentPage", this.state.singleIncome);
     return (
       <CustomerContext.Provider
         value={{
@@ -418,6 +422,7 @@ class CustomerProvider extends Component {
           handleInquiries: this.handleInquiries,
           handleReply: this.handleReply,
           handleIncome: this.handleIncome,
+          handleIncomeDetails: this.handleIncomeDetails,
           setOpen: this.setOpen,
           getOpen: this.getOpen,
         }}

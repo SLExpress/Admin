@@ -101,3 +101,12 @@ export function replyTickets(msg, id) {
   const data = { reply: msg, ticketId: id };
   return http.put(apiEndpoint + "/" + "ticketReply", data);
 }
+
+/**
+ * View SinglePurchase
+ */
+
+export function getPurchase(id) {
+  const data = { purchaseId: id };
+  return http.post(apiEndpoint + "/" + "getPurchase", data);
+}

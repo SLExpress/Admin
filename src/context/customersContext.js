@@ -204,7 +204,7 @@ class CustomerProvider extends Component {
 
   async siteList() {
     const { data: sites } = await getSites();
-
+    console.log("SITESS", sites);
     var siteList = sites.map((s) => {
       var cus = this.state.customers.filter((c) => c._id == s.customerId);
       // var web = this.state.sites.filter((w) => c._id == s.customerId);
@@ -310,25 +310,69 @@ class CustomerProvider extends Component {
   handleIncome = async (data) => {
     console.log("Income data", data);
     try {
-      const { data: Income } = await getEarnings(data);
-      // console.log("INC", Income[0]);
+      const { data: income } = await getEarnings(data);
+
+      console.log("INC", income);
       // console.log("ddd", Income[0].payments[0].payment.$numberDecimal);
-      var payments = Income[0].payments.map((i) => {
-        var inc = this.state.customers.filter((c) => c._id == i.customerId);
-        if (inc.length == 0) inc.firstName = "Not Found";
-        else inc.firstName = inc[0].firstName;
-        console.log("paymentsfirstName", inc.firstName);
+      var payments = income.map((i) => {
+        console.log("INCMAP", i);
+        var inc = this.state.customers.filter(
+          (c) => c._id == i.payments[0].customerId
+        );
+        console.log("inc", inc[0]);
+        if (inc.length == 0) {
+          // inc.customer = i.payments[0].customerId;
+          // inc.developerId = i.payments[0].developerId;
+          inc.payment = i.payments[0].payment.$numberDecimal * 2 + ".00";
+          inc.paymentDate = i.payments[0].paymentDate;
+          // inc.purchaseId = i.payments[0].purchaseId;
+          inc.businessUser = "Not Found";
+          inc.confirmed = "Not Found";
+          inc.email = "Not Found";
+          inc.firstName = i.payments[0].customerId;
+          inc.lastName = "Not Found";
+          inc.phone = "Not Found";
+          inc.username = "Not Found";
+          // inc.customUrl = "Not Found";
+          // inc.defaultUrl = "Not Found";
+        } else {
+          // inc.customer = inc[0].firstName;
+          // inc.developerId = i.payments[0].developerId;
+          inc.payment = i.payments[0].payment.$numberDecimal * 2 + ".00";
+          inc.paymentDate = i.payments[0].paymentDate;
+          // inc.purchaseId = i.payments[0].purchaseId;
+          inc.businessUser = inc[0].businessUser;
+          inc.confirmed = inc[0].confirmed;
+          inc.email = inc[0].email;
+          inc.firstName = inc[0].firstName;
+          inc.lastName = inc[0].lastName;
+          inc.phone = inc[0].phone;
+          inc.username = inc[0].username;
+          // inc.customUrl = inc[0].customUrl;
+          // inc.defaultUrl = inc[0].defaultUrl;
+        }
+        // if (inc.length == 0) inc[0].firstName = "Not Found";
+        // else inc[0].firstName = inc[0].firstName;
+        // console.log("paymentsfirstName", inc.firstName);
 
         return {
-          customer: inc.firstName,
-          developerId: i.developerId,
-          payment: i.payment.$numberDecimal * 2 + ".00",
-          paymentDate: i.paymentDate,
-          purchaseId: i.purchaseId,
-          // customUrl: i.url.customUrl,
-          // defaultUrl: i.url.defaultUrl,
+          // customer: inc.customer,
+          // developerId: inc.developerId,
+          payment: inc.payment,
+          paymentDate: inc.paymentDate,
+          // purchaseId: inc.purchaseId,
+          businessUser: inc.businessUser,
+          confirmed: inc.confirmed,
+          email: inc.email,
+          firstName: inc.firstName,
+          lastName: inc.lastName,
+          phone: inc.phone,
+          username: inc.username,
+          // customUrl: inc.url.customUrl,
+          // defaultUrl: inc.url.defaultUrl,
         };
       });
+      console.log("payments", payments);
       this.setState({ income: payments });
       const NewIncomes = _.orderBy(
         this.state.income,
@@ -336,7 +380,7 @@ class CustomerProvider extends Component {
         ["desc"]
       );
       this.setState({ income: NewIncomes, loading: false });
-      // console.log("payments", this.state.income);
+      console.log("payments", this.state.income);
 
       Swal.fire({
         icon: "success",

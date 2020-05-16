@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid } from "semantic-ui-react";
+import { Grid, Header } from "semantic-ui-react";
 import {
   TitleWapper,
   StyleGrid,
@@ -15,6 +15,21 @@ import _ from "lodash";
 
 class Income extends Component {
   static contextType = CustomerContext;
+
+  renderTotalIncome(income) {
+    let totalIncome = 0;
+    var total = income.map((t) => {
+      totalIncome += parseInt(t.payment);
+
+      //   console.log("totalincome", totalIncome);
+    });
+    // for(var i = 0 ; i<= income.length; i++){
+    console.log("totalIncome", totalIncome);
+
+    // }
+
+    return totalIncome;
+  }
 
   render() {
     const {
@@ -41,9 +56,11 @@ class Income extends Component {
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
     const allIncome = paginate(sorted, currentPage, pageSize);
     const { length: totalCount } = filtered;
+
     if (loading) {
       return <Loading />;
     }
+    console.log("INCOME", income);
     return (
       <Grid.Column
         mobile={13}
@@ -69,7 +86,7 @@ class Income extends Component {
                 {income && (
                   <>
                     <IncomeTable
-                      earning={allIncome}
+                      incomes={allIncome}
                       currentPage={currentPage}
                       sortColumn={sortColumn}
                       onSort={handleSort}
@@ -85,6 +102,10 @@ class Income extends Component {
                     />
                   </>
                 )}
+
+                <Header as="h3">
+                  Total = Rs.{this.renderTotalIncome(income)} /=
+                </Header>
               </StyleColumn>
             </Grid>
           </Grid.Column>

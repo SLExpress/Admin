@@ -16,11 +16,11 @@ axios.interceptors.response.use(null, (error) => {
 });
 
 // axios({
-//   url: "http://slexpress.tk:3000/admin/getEarnings",
+//   url: "http://slexpress.tk:3000/admin/getPurchase",
 //   method: "post",
 //   data: {
-//     month: "3",
-//     year: "2020",
+//     purchaseId: "5ebf7ddbcff20e33e0247d6b",
+//     // year: "2020",
 //     //   lastname: "Saubhagyaqsd",
 //     //   email: "yasmikasyasssdhq@gmail.com",
 //     //   password: "qqqqqqqsdq",
@@ -30,7 +30,7 @@ axios.interceptors.response.use(null, (error) => {
 //   headers: {
 //     "Content-Type": "application/json",
 //     Authorization:
-//       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWI2NTE0MTIzYzExNDJlY2I0ZGE1ZWQiLCJlbWFpbCI6ImNjY2NAZ21haWwuY29tIiwiaWF0IjoxNTg5MDEzNzQ4LCJleHAiOjE1ODkwMTczNDh9.pphEYsyZHfo3xcOvcXrY3tUjZBvRKieLopXgJr4M7dQ",
+//       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWI2NTE0MTIzYzExNDJlY2I0ZGE1ZWQiLCJlbWFpbCI6ImNjY2NAZ21haWwuY29tIiwiaWF0IjoxNTg5NjIxMzQwLCJleHAiOjE1ODk2MjQ5NDB9.am3u_BOXj19zuiyGFDD6zqphPA9uyFIu-NNtSN_3NO4",
 //   },
 // })
 //   .then((response) => console.log(response))

@@ -163,12 +163,7 @@ class CompanyProvider extends Component {
   handleCategorySave = async (category) => {
     try {
       const res = await saveCategory(category);
-      // Swal.fire({
-      //   icon: "success",
-      //   title: "Mission Update Sucessfully..!!",
-      //   showConfirmButton: false,
-      //   timer: 1500,
-      // });
+
       if (res.status === 200) await this.categoryList();
     } catch (ex) {
       if (ex.response && ex.response.status === 404)

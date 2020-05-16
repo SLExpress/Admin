@@ -18,6 +18,7 @@ import DomainList from "./Components/Pages/CustomerManagement/DomainList/domainL
 import CustomerTickets from "./Components/Pages/CustomerManagement/CustomerInquiries/customerTickets";
 import CustomerInquiries from "./Components/Pages/CustomerManagement/CustomerInquiries/customerInquiries";
 import Income from "./Components/Pages/CustomerManagement/Income/income";
+import IncomeSummary from "./Components/Pages/CustomerManagement/Income/incomeSummary";
 import UserDetails from "./Components/Pages/CustomerManagement/CustomerDetails/userDetails";
 
 import DeveloperList from "./Components/Pages/DeveloperManagement/DeveloperList/developerList";
@@ -38,7 +39,6 @@ const Routes = () => {
       <Route exact path="/" component={Home} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/about-us" component={CompanyDetails} />
-      {/* <Route path="/Company-Details/:id" component={CompanyDetailsForm} /> */}
       <Route path="/Contact-us" component={ContactDetails} />
       <Route path="/category/:id" component={CategoryForm} />
       <Route path="/terms-of-services" component={TermsOfServices} />
@@ -53,6 +53,7 @@ const Routes = () => {
       <Route path="/customer-tickets" component={CustomerTickets} />
       <Route path="/customer-inquiries/:id" component={CustomerInquiries} />
       <Route path="/income" component={Income} />
+      <Route path="/income-summary" component={IncomeSummary} />
       <Route path="/user-details" component={UserDetails} />
 
       <Route path="/developer-list" component={DeveloperList} />

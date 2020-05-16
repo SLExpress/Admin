@@ -12,7 +12,7 @@ export const CButtons = ({ name, color, onSubmit }) => {
   );
 };
 
-export const Buttons = ({ name, color, onSubmit }) => {
+export const Buttons = ({ name, color, onSubmit, income }) => {
   return (
     <ButtonWapper inverted color={color} onClick={onSubmit}>
       {name}
@@ -30,6 +30,16 @@ export const IButtons = ({ name, color, icon, onSubmit }) => {
       onClick={onSubmit}
       icon={icon}
     />
+  );
+};
+
+export const ButtonGroup = ({ name1, name2 }) => {
+  return (
+    <Button.Group attached="top">
+      <Button style={{ background: "#2fa7d9", color: "white" }}>{name1}</Button>
+      <Button style={{ background: "#2fa7d9", color: "white" }}>{name2}</Button>
+      ;
+    </Button.Group>
   );
 };
 

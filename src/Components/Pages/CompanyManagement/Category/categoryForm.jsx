@@ -33,7 +33,7 @@ class CategoryForm extends Forms {
     if (categoryId === "category-form") return;
 
     const category = this.context.singleCategory[0];
-    if (!category) return this.props.history.replace("/category");
+    if (!category) return this.props.history.replace("/categories");
 
     this.setState({ data: this.mapToCategoryModel(category) });
   }
@@ -49,7 +49,7 @@ class CategoryForm extends Forms {
   doSubmit = async () => {
     console.log("doSubmit");
     await this.context.handleCategorySave(this.state.data);
-    this.props.history.push("/category");
+    this.props.history.push("/categories");
   };
 
   render() {

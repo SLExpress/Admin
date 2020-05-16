@@ -11,14 +11,13 @@ import { Buttons, ButtonGroup } from "../../../Common/buttons";
 import { Link } from "react-router-dom";
 import Items from "../../../Common/item";
 import { CustomerContext } from "../../../../context/customersContext";
-import CustomerPurchases from "./customerPurchases";
 
-class UserDetails extends Component {
+class IncomeSummary extends Component {
   static contextType = CustomerContext;
   render() {
-    const { singleCustomer } = this.context;
-    // console.log("location", details[0]);
-
+    // const { singleCustomer } = this.context;
+    // const { incomes } = this.props;
+    // console.log("income-location", income);
     return (
       <Grid.Column
         mobile={13}
@@ -28,7 +27,7 @@ class UserDetails extends Component {
       >
         <StyleGrid>
           <Grid.Column mobile={16} tablet={16} computer={16}>
-            <TitleWapper>User Details</TitleWapper>
+            <TitleWapper>Income Summary</TitleWapper>
             <Grid>
               <Grid.Column mobile={1} tablet={1} computer={1}></Grid.Column>
               <StyleColumn
@@ -44,14 +43,15 @@ class UserDetails extends Component {
                 <Segment>
                   <Grid columns={2} relaxed="very">
                     <Grid.Column>
-                      <Items data={singleCustomer} header="Personal Details" />
+                      <Items
+                        data={this.props.location.incomes}
+                        header="Personal Details"
+                      />
                       <Link to="User-List">
                         <Buttons name="Back" color="#40a3dc" />
                       </Link>
                     </Grid.Column>
-                    <Grid.Column>
-                      <CustomerPurchases />
-                    </Grid.Column>
+                    <Grid.Column>{/* <CustomerPurchases /> */}</Grid.Column>
                   </Grid>
 
                   <Divider vertical>And</Divider>
@@ -64,7 +64,7 @@ class UserDetails extends Component {
     );
   }
 }
-export default UserDetails;
+export default IncomeSummary;
 
 const StyledForm = styled(Form)`
   display: flex;

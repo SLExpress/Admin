@@ -6,7 +6,7 @@ const MenuData = [
       // { name: "company details", icon: "building outline" },
       // { name: "contact details", icon: "volume control phone" },
       { name: "categories", icon: "server" },
-      { name: "income", icon: "chart line" },
+      { name: "profit", icon: "chart line" },
 
       // "dashboard",
       // "company details",
@@ -32,7 +32,7 @@ const MenuData = [
     list: [
       { name: "developer list", icon: "user secret" },
       { name: "script list", icon: "file archive" },
-      { name: "income", icon: "money bill alternate" },
+      { name: "payments", icon: "money bill alternate" },
       { name: "developer tickets", icon: "comments" },
       // "developer list", "script list", "payment", "developer tickets"
     ],

@@ -31,7 +31,12 @@ class CustomerInquiries extends Component {
             <TitleWapper>Customer Inquiries</TitleWapper>
             <Grid>
               <Grid.Column mobile={2} tablet={2} computer={2}></Grid.Column>
-              <StyleColumn mobile={12} tablet={12} computer={12}>
+              <StyleColumn
+                mobile={12}
+                tablet={12}
+                computer={12}
+                style={{ backgroundImage: ' url("./images/q12.jpg")' }}
+              >
                 <Messagebox
                   sortAllMsg={sortAllMsg}
                   id={this.props.match.params.id}

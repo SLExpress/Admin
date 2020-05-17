@@ -36,13 +36,10 @@ export function getScripts() {
  * Delete Scripts
  */
 
-export function deleteScript(siteId) {
-  const data = {
-    id: siteId,
-    type: "developer",
-  };
+export function deleteScript(scriptid) {
+  const data = { id: scriptid };
   // console.log("data", data);
-  return http.delete(apiEndpoint + "/" + "deleteUser", { data });
+  return http.delete(apiEndpoint + "/" + "deleteScipt", { data });
 }
 
 /**
@@ -100,6 +97,16 @@ export function replyTickets(msg, id) {
   console.log("ticketid", msg, id);
   const data = { reply: msg, ticketId: id };
   return http.put(apiEndpoint + "/" + "ticketReply", data);
+}
+
+/**
+ * Get Payments
+ */
+
+export function getPayments(period) {
+  console.log("ticketid", period);
+  const data = { month: period.month, year: period.year };
+  return http.post(apiEndpoint + "/" + "getEarnings", data);
 }
 
 /**

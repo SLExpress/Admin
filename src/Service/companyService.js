@@ -5,6 +5,30 @@ import { apiUrl } from "../Config/Config.json";
 const apiEndpoint = apiUrl + "/admin";
 
 /**
+ * Get Admin Profile
+ */
+
+export function getAdmin() {
+  try {
+    if (auth.getCurrentAdmin()) {
+      return http.get(apiEndpoint + "/" + "getAdmin");
+    }
+  } catch (ex) {}
+}
+
+/**
+ *Delete Admin
+ */
+
+export function deleteAdmin() {
+  console.log("handleAdminDeleteServices");
+  // const data = { categoryId: id };
+  // console.log(data);
+
+  return http.delete(apiEndpoint + "/" + "deleteAdmin");
+}
+
+/**
  * Get Category
  */
 

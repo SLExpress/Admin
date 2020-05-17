@@ -9,6 +9,7 @@ import {
   getTickets,
   viewInquiries,
   replyTickets,
+  getPayments,
   getPurchase,
 } from "../Service/developerService";
 import auth from "../Service/authAdminService";
@@ -22,6 +23,7 @@ const DeveloperContext = React.createContext();
 class DeveloperProvider extends Component {
   state = {
     developers: [],
+    // SingleDev: "",
     scripts: [],
     buyers: [],
     webSites: [],
@@ -32,6 +34,8 @@ class DeveloperProvider extends Component {
     sortAdminMsg: [],
     sortAllMsg: [],
     singlePurchase: "",
+    payments: [],
+    singlePayment: "",
     currentPage: 1,
     pageSize: 5,
     loading: true,
@@ -283,12 +287,6 @@ class DeveloperProvider extends Component {
       // console.log(" payhereOrder", web);
       const webName = this.state.scripts.filter((s) => s.id == web[0].scriptId);
       console.log(" webName", webName[0].name);
-      // return {
-      //   id: web[0].websiteId,
-      //   scriptId: web[0].scriptId,
-      //   name: webName[0].name,
-      // };
-      // });
 
       const singlePurchase = {
         Date: <Moment format="DD/MM/YYYY ">{purchase.date}</Moment>,
@@ -297,9 +295,6 @@ class DeveloperProvider extends Component {
         Description: webName[0].description,
         Payment_No: purchase.payherePayment,
         Amount: purchase.payment.amount.$numberDecimal,
-        // lastName: purchase.lastName,
-        // phone: purchase.phone,
-        // username: purchase.username,
       };
       this.setState({ singlePurchase, loading: false });
       // this.setState({ singleCustomer, loading: false });
@@ -309,10 +304,142 @@ class DeveloperProvider extends Component {
     }
   };
 
+  handlePayment = async (data) => {
+    console.log("Income data", data);
+    try {
+      const { data: payment } = await getPayments(data);
+
+      console.log("INC", payment);
+      // console.log("ddd", Income[0].payments[0].payment.$numberDecimal);
+      var payments = payment.map((p) => {
+        // console.log("INCMAP", i);
+        var pay = this.state.developers.filter(
+          (c) => c._id == p.payments[0].developerId
+        );
+        console.log("inc", p);
+        if (pay.length == 0) {
+          pay.developer = "Not Found";
+        } else {
+          pay.developer = pay[0].firstName;
+        }
+
+        return {
+          customerId: p.payments[0].customerId,
+          developer: pay.developer,
+          developerId: p.payments[0].developerId,
+          payment: p.payments[0].payment.$numberDecimal,
+          paymentDate: p.payments[0].paymentDate,
+          purchaseId: p.payments[0].purchaseId,
+        };
+      });
+      console.log("payments", payments);
+      this.setState({ payments });
+      const NewPayments = _.orderBy(
+        this.state.payments,
+        ["paymentDate"],
+        ["desc"]
+      );
+      this.setState({ payments: NewPayments, loading: false });
+      console.log("State-payments", this.state.payments);
+
+      Swal.fire({
+        icon: "success",
+        title: "Done",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 422)
+        this.setState({ income: [], loading: false });
+      Swal.fire({
+        icon: "error",
+        title: "Invalide Input",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    }
+  };
+
+  handlePaymentDetails = async (data) => {
+    // console.log("SUMMARY", data);
+    var paymentDetails = this.state.developers.filter(
+      (d) => d._id == data.developerId
+    );
+    console.log("paymentDetails", paymentDetails.businessUser);
+    if (paymentDetails[0].businessUser) paymentDetails[0].businessUser = "Yes";
+    else paymentDetails[0].businessUser = "No";
+
+    if (paymentDetails[0].confirmed) paymentDetails[0].confirmed = "Yes";
+    else paymentDetails[0].confirmed = "No";
+
+    if (paymentDetails.length == 0) {
+      paymentDetails.businessUser = "Not Found";
+      paymentDetails.confirmed = "Not Found";
+      paymentDetails.email = "Not Found";
+      paymentDetails.firstName = paymentDetails.developerId;
+      paymentDetails.lastName = "Not Found";
+      paymentDetails.phone = "Not Found";
+      paymentDetails.username = "Not Found";
+    }
+
+    const singlePayment = {
+      BusinessUser: paymentDetails[0].businessUser,
+      Confirmed: paymentDetails[0].confirmed,
+      Email: paymentDetails[0].email,
+      First_Name: paymentDetails[0].firstName,
+      Last_Name: paymentDetails[0].lastName,
+      Phone: paymentDetails[0].phone,
+      Username: paymentDetails[0].username,
+    };
+
+    this.setState({ singlePayment, loading: false });
+    console.log("singlePayment", this.state.singlePayment);
+  };
+
+  // handleDeveloprtDetails = async (data) => {
+  //   // console.log("SUMMARY", data);
+  //   var devDetails = this.state.developers.filter(
+  //     (d) => d._id == data.developerId
+  //   );
+  //   console.log("devDetails", devDetails.businessUser);
+  //   if (devDetails[0].businessUser) devDetails[0].businessUser = "Yes";
+  //   else devDetails[0].businessUser = "No";
+
+  //   if (devDetails[0].confirmed) devDetails[0].confirmed = "confirmed";
+  //   else devDetails[0].confirmed = "Not confirmed";
+
+  //   if (devDetails.length == 0) {
+  //     devDetails.businessUser = "Not Found";
+  //     devDetails.confirmed = "Not Found";
+  //     devDetails.email = "Not Found";
+  //     devDetails.firstName = devDetails.customerId;
+  //     devDetails.lastName = "Not Found";
+  //     devDetails.phone = "Not Found";
+  //     devDetails.username = "Not Found";
+  //   } else {
+  //   }
+
+  //   const SingleDev = {
+  //     BusinessUser: devDetails[0].businessUser,
+  //     Confirmed: devDetails[0].confirmed,
+  //     Email: devDetails[0].email,
+  //     First_Name: devDetails[0].firstName,
+  //     Last_Name: devDetails[0].lastName,
+  //     Phone: devDetails[0].phone,
+  //     Username: devDetails[0].username,
+  //   };
+
+  //   this.setState({ SingleDev, loading: false });
+  //   console.log("SingleDev", this.state.SingleDev);
+  // };
+
   render() {
-    console.log("webSites", this.state.webSites);
+    console.log("developers", this.state.developers);
     //console.log("moment2", moment("2020-04-01T19:34:07.418Z").unix());
-    console.log("SinglePurchase", this.state.singlePurchase);
+    // console.log("state-SingleDev", this.state.SingleDev);
+    console.log("state-singlePayment", this.state.singlePayment);
+    console.log("state-singlePurchase", this.state.singlePurchase);
+
     return (
       <DeveloperContext.Provider
         value={{
@@ -331,6 +458,9 @@ class DeveloperProvider extends Component {
           handleInquiries: this.handleInquiries,
           handleReply: this.handleReply,
           handlePurchase: this.handlePurchase,
+          handlePayment: this.handlePayment,
+          handlePaymentDetails: this.handlePaymentDetails,
+          handleDeveloprtDetails: this.handleDeveloprtDetails,
         }}
       >
         {this.props.children}

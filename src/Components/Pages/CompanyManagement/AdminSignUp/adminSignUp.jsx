@@ -47,7 +47,7 @@ class AdminSignUp extends Forms {
         timer: 1500,
       });
       auth.loginWithJwt("username", response.headers);
-      window.location = "/Dashboard";
+      window.location = "/dashboard";
     } catch (ex) {
       if (ex.response && ex.response.status === 422) {
         const errors = { ...this.state.errors };

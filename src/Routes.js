@@ -11,6 +11,7 @@ import Category from "./Components/Pages/CompanyManagement/Category/category";
 import CategoryForm from "./Components/Pages/CompanyManagement/Category/categoryForm";
 import AdminSignIn from "./Components/Pages/CompanyManagement/AdminSignIn/adminSignIn";
 import AdminSignUp from "./Components/Pages/CompanyManagement/AdminSignUp/adminSignUp";
+import AdminProfile from "./Components/Pages/CompanyManagement/AdminProfile/adminProfile";
 
 import CustomerList from "./Components/Pages/CustomerManagement/CustomerList/customerList";
 import SiteList from "./Components/Pages/CustomerManagement/SiteList/siteList";
@@ -23,8 +24,8 @@ import UserDetails from "./Components/Pages/CustomerManagement/CustomerDetails/u
 
 import DeveloperList from "./Components/Pages/DeveloperManagement/DeveloperList/developerList";
 import ScriptList from "./Components/Pages/DeveloperManagement/ScriptList/scriptList";
-import Payment from "./Components/Pages/DeveloperManagement/Payment/payment";
-import PaymentForm from "./Components/Pages/DeveloperManagement/Payment/paymentForm";
+import Payments from "./Components/Pages/DeveloperManagement/Payments/payments";
+import PaymentSummary from "./Components/Pages/DeveloperManagement/Payments/paymentSummary";
 import DeveloperTickets from "./Components/Pages/DeveloperManagement/DeveloperInquiries/developerTickets";
 import DeveloperInquiries from "./Components/Pages/DeveloperManagement/DeveloperInquiries/developerInquiries";
 
@@ -46,6 +47,7 @@ const Routes = () => {
       <Route path="/admin-sign-in" component={AdminSignIn} />
       <Route path="/log-out" component={LogOut} />
       <Route path="/admin-sign-up" component={AdminSignUp} />
+      <Route path="/admin-profile" component={AdminProfile} />
 
       <Route path="/user-list" component={CustomerList} />
       <Route path="/site-list" component={SiteList} />
@@ -58,8 +60,8 @@ const Routes = () => {
 
       <Route path="/developer-list" component={DeveloperList} />
       <Route path="/script-list" component={ScriptList} />
-      <Route path="/payment/:id" component={PaymentForm} />
-      <Route path="/payment" component={Payment} />
+      <Route path="/payments" component={Payments} />
+      <Route path="/payment-summary" component={PaymentSummary} />
       <Route path="/developer-tickets" component={DeveloperTickets} />
       <Route path="/developer-inquiries/:id" component={DeveloperInquiries} />
 

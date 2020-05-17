@@ -3,6 +3,8 @@ import auth from "../Service/authAdminService";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import {
+  getAdmin,
+  deleteAdmin,
   getCategories,
   deleteCategory,
   saveCategory,
@@ -21,6 +23,7 @@ const CompanyContext = React.createContext();
 
 class CompanyProvider extends Component {
   state = {
+    admin: "",
     breadcrumb: "",
     ourVision: [],
     ourMission: [],
@@ -38,6 +41,7 @@ class CompanyProvider extends Component {
   componentDidMount = async () => {
     try {
       if (auth.getCurrentAdmin()) {
+        await this.getAdminDetails();
         await this.categoryList();
         await this.handleCategorySave();
         await this.Mission();
@@ -72,6 +76,76 @@ class CompanyProvider extends Component {
     this.setState({ breadcrumb: url });
   };
 
+  /**
+   * Admin Profile
+   */
+
+  async getAdminDetails() {
+    const { data: admin } = await getAdmin();
+    if (admin.confirmed) admin.confirmed = "Confirmed";
+    else admin.confirmed = "Not Confirmed";
+    const adminDetails = {
+      Confirmed: admin.confirmed,
+      Email: admin.email,
+      First_Name: admin.firstName,
+      Last_Name: admin.lastName,
+      Phone: admin.phone,
+      Username: admin.username,
+    };
+    this.setState({ admin: adminDetails, loading: false });
+  }
+
+  // handleAdminDelete = async () => {
+  async handleAdminDelete() {
+    console.log("handleAdminDelete");
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then(async (result) => {
+        if (result.value) {
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            "Your Account has been deleted.",
+            "success"
+          );
+
+          try {
+            const res = await deleteAdmin();
+            if (res.status === 200) {
+              auth.adminLogOut();
+              window.location = "/";
+            }
+          } catch (ex) {
+            if (ex.response && ex.response.status === 404)
+              toast.error("This Account has already been deleted.");
+          }
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Your imaginary file is safe :)",
+            "error"
+          );
+        }
+      });
+  }
   /**
    * Categories
    */
@@ -271,11 +345,13 @@ class CompanyProvider extends Component {
   }
 
   render() {
-    console.log("categories", this.state.categories);
+    console.log("admin", this.state.admin);
     return (
       <CompanyContext.Provider
         value={{
           ...this.state,
+          getAdminDetails: this.getAdminDetails,
+          handleAdminDelete: this.handleAdminDelete,
           handlePageChange: this.handlePageChange,
           handlePreviousPageChange: this.handlePreviousPageChange,
           handleNextPageChange: this.handleNextPageChange,

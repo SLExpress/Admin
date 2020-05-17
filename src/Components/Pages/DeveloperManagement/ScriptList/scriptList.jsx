@@ -21,7 +21,7 @@ class ScriptList extends Component {
       developers,
       scripts,
       buyers,
-      handleDeveloperSiteDelete,
+      handleScriptDelete,
       handleApprovel,
       handleDownloadScripts,
       handlePageChange,
@@ -86,7 +86,7 @@ class ScriptList extends Component {
                   onDownloadScripts={handleDownloadScripts}
                   currentPage={currentPage}
                   sortColumn={sortColumn}
-                  onDelete={handleDeveloperSiteDelete}
+                  onDelete={handleScriptDelete}
                   onSort={handleSort}
                 />
                 <Pagination

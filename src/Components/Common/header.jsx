@@ -120,52 +120,73 @@ class Header extends Component {
                     </div>
                     <div className="col-md-8">
                       <div id="nav-bar">
-                        <ul>
-                          <li>
-                            <Link
-                              style={{ color: "#fff", textDecoration: "none" }}
-                              to="/"
-                            >
-                              HOME
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              style={{ color: "#fff", textDecoration: "none" }}
-                              to="/contact-us"
-                              onClick={() => getBreadcrumb("contact us")}
-                            >
-                              CONTACT US
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              style={{ color: "#fff", textDecoration: "none" }}
-                              to="/about-us"
-                              onClick={() => getBreadcrumb("about us")}
-                            >
-                              ABOUT US
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              style={{ color: "#fff", textDecoration: "none" }}
-                              to="/terms-of-services"
-                              onClick={() => getBreadcrumb("terms of services")}
-                            >
-                              TERMS OF SERVICES
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              style={{ color: "#fff", textDecoration: "none" }}
-                              to="/admin-profile"
-                              onClick={() => getBreadcrumb("admin profile")}
-                            >
-                              ADMIN PROFILE
-                            </Link>
-                          </li>
-                        </ul>
+                        {admin && (
+                          <>
+                            <ul>
+                              <li>
+                                <Link
+                                  style={{
+                                    color: "#fff",
+                                    textDecoration: "none",
+                                  }}
+                                  to="/"
+                                >
+                                  HOME
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  style={{
+                                    color: "#fff",
+                                    textDecoration: "none",
+                                  }}
+                                  to="/contact-us"
+                                  onClick={() => getBreadcrumb("contact us")}
+                                >
+                                  CONTACT US
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  style={{
+                                    color: "#fff",
+                                    textDecoration: "none",
+                                  }}
+                                  to="/about-us"
+                                  onClick={() => getBreadcrumb("about us")}
+                                >
+                                  ABOUT US
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  style={{
+                                    color: "#fff",
+                                    textDecoration: "none",
+                                  }}
+                                  to="/terms-of-services"
+                                  onClick={() =>
+                                    getBreadcrumb("terms of services")
+                                  }
+                                >
+                                  TERMS OF SERVICES
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  style={{
+                                    color: "#fff",
+                                    textDecoration: "none",
+                                  }}
+                                  to="/admin-profile"
+                                  onClick={() => getBreadcrumb("admin profile")}
+                                >
+                                  ADMIN PROFILE
+                                </Link>
+                              </li>
+                            </ul>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>

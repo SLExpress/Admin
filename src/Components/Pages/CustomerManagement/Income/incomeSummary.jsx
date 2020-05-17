@@ -40,7 +40,7 @@ class IncomeSummary extends Component {
                 >
                   <StyleGrid>
                     <Grid.Column mobile={16} tablet={16} computer={16}>
-                      <TitleWapper>Income Report</TitleWapper>
+                      <TitleWapper>Income Summary</TitleWapper>
                       <Grid>
                         <Grid.Column
                           mobile={1}
@@ -54,17 +54,30 @@ class IncomeSummary extends Component {
                           style={{ marginBottom: "15rem" }}
                         >
                           <ButtonGroup
-                            name1={"Personal Detais"}
-                            name2={"Payment Detais"}
+                            name1={"Personal Details"}
+                            name2={"Payment Details"}
                           />
                           <Segment>
                             <Grid columns={2} relaxed="very">
                               <Grid.Column>
-                                <Image
-                                  src="https://react.semantic-ui.com/images/avatar/large/nan.jpg"
-                                  size="small"
-                                  circular
-                                />
+                                <Grid>
+                                  <Grid.Column
+                                    mobile={6}
+                                    tablet={6}
+                                    computer={6}
+                                  ></Grid.Column>
+                                  <Grid.Column
+                                    mobile={6}
+                                    tablet={6}
+                                    computer={6}
+                                  >
+                                    <Image
+                                      src="https://react.semantic-ui.com/images/avatar/large/nan.jpg"
+                                      size="small"
+                                      circular
+                                    />
+                                  </Grid.Column>
+                                </Grid>
                                 <Items
                                   data={customerContext.singleIncome}
                                   header="Personal Details"
@@ -76,7 +89,7 @@ class IncomeSummary extends Component {
                               <Grid.Column>
                                 <Items
                                   data={developerContext.singlePurchase}
-                                  header="Purchase Summary"
+                                  header="Purchase Reporty"
                                 />
                               </Grid.Column>
                             </Grid>

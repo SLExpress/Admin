@@ -16,21 +16,21 @@ axios.interceptors.response.use(null, (error) => {
 });
 
 // axios({
-//   url: "http://slexpress.tk:3000/admin/getPurchase",
-//   method: "post",
-//   data: {
-//     purchaseId: "5ebf7ddbcff20e33e0247d6b",
-//     // year: "2020",
-//     //   lastname: "Saubhagyaqsd",
-//     //   email: "yasmikasyasssdhq@gmail.com",
-//     //   password: "qqqqqqqsdq",
-//     //   phone: 1501762822
-//   },
+//   url: "http://slexpress.tk:3000/admin/deleteAdmin",
+//   method: "delete",
+//   // data: {
+//   //   purchaseId: "5ebf7ddbcff20e33e0247d6b",
+//   // year: "2020",
+//   //   lastname: "Saubhagyaqsd",
+//   //   email: "yasmikasyasssdhq@gmail.com",
+//   //   password: "qqqqqqqsdq",
+//   //   phone: 1501762822
+//   // },
 
 //   headers: {
 //     "Content-Type": "application/json",
 //     Authorization:
-//       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWI2NTE0MTIzYzExNDJlY2I0ZGE1ZWQiLCJlbWFpbCI6ImNjY2NAZ21haWwuY29tIiwiaWF0IjoxNTg5NjQwNjExLCJleHAiOjE1ODk2NDQyMTF9.TIlrPsYb1hpfqNN6iPohgZmD8dGp4qb50jREc6iD-uE",
+//       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWI2NTE0MTIzYzExNDJlY2I0ZGE1ZWQiLCJlbWFpbCI6ImNjY2NAZ21haWwuY29tIiwiaWF0IjoxNTg5NzAwMTU4LCJleHAiOjE1ODk3MDM3NTh9.ajCNoXJjj4jPluCXEJyB5aiqJLadyqwhNS4IABeMKE0",
 //   },
 // })
 //   .then((response) => console.log(response))

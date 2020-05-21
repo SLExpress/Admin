@@ -53,9 +53,9 @@ axios.interceptors.response.use(null, (error) => {
 //     console.log(error);
 //   });
 
-// export function setJwt(jwt) {
-//   axios.defaults.headers.common["Authorization"] = "Bearer " + jwt;
-// }
+export function setJwt(jwt) {
+  axios.defaults.headers.common["Authorization"] = "Bearer " + jwt;
+}
 
 export default {
   get: axios.get,

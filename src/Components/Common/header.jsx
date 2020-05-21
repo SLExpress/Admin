@@ -8,7 +8,7 @@ class Header extends Component {
   static contextType = CompanyContext;
 
   render() {
-    const { getBreadcrumb } = this.context;
+    const { getBreadcrumb1 } = this.context;
     const admin = this.props.admin;
     return (
       <Grid style={{ margin: 0, padding: 0 }}>
@@ -59,7 +59,9 @@ class Header extends Component {
                                     textDecoration: "none",
                                   }}
                                   to="/admin-sign-in"
-                                  onClick={() => getBreadcrumb("admin sign in")}
+                                  onClick={() =>
+                                    getBreadcrumb1("admin sign in")
+                                  }
                                 >
                                   Login
                                 </Link>
@@ -73,7 +75,7 @@ class Header extends Component {
                                     textDecoration: "none",
                                   }}
                                   to="/log-out"
-                                  onClick={() => getBreadcrumb("log out")}
+                                  onClick={() => getBreadcrumb1("log out")}
                                 >
                                   Log Out
                                 </Link>
@@ -83,7 +85,9 @@ class Header extends Component {
                                     textDecoration: "none",
                                   }}
                                   to="/admin-sign-up"
-                                  onClick={() => getBreadcrumb("admin sign up")}
+                                  onClick={() =>
+                                    getBreadcrumb1("admin sign up")
+                                  }
                                 >
                                   / New Admin
                                 </Link>
@@ -141,7 +145,7 @@ class Header extends Component {
                                     textDecoration: "none",
                                   }}
                                   to="/contact-us"
-                                  onClick={() => getBreadcrumb("contact us")}
+                                  onClick={() => getBreadcrumb1("contact us")}
                                 >
                                   CONTACT US
                                 </Link>
@@ -153,7 +157,7 @@ class Header extends Component {
                                     textDecoration: "none",
                                   }}
                                   to="/about-us"
-                                  onClick={() => getBreadcrumb("about us")}
+                                  onClick={() => getBreadcrumb1("about us")}
                                 >
                                   ABOUT US
                                 </Link>
@@ -166,7 +170,7 @@ class Header extends Component {
                                   }}
                                   to="/terms-of-services"
                                   onClick={() =>
-                                    getBreadcrumb("terms of services")
+                                    getBreadcrumb1("terms of services")
                                   }
                                 >
                                   TERMS OF SERVICES
@@ -179,7 +183,9 @@ class Header extends Component {
                                     textDecoration: "none",
                                   }}
                                   to="/admin-profile"
-                                  onClick={() => getBreadcrumb("admin profile")}
+                                  onClick={() =>
+                                    getBreadcrumb1("admin profile")
+                                  }
                                 >
                                   ADMIN PROFILE
                                 </Link>

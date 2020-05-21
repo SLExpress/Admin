@@ -32,7 +32,7 @@ class CustomerListTable extends Component {
     },
 
     {
-      key: "button",
+      key: "buttons",
       content: (customer) => (
         <IButton
           onSubmit={() => this.props.onDelete(customer)}

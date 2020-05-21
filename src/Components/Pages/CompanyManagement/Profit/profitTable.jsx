@@ -4,7 +4,7 @@ import Tables from "../../../Common/tables";
 import { Link } from "react-router-dom";
 import { DeveloperContext } from "../../../../context/developersContext";
 
-class PaymentTable extends Component {
+class ProfitTable extends Component {
   static contextType = DeveloperContext;
 
   columns = [
@@ -13,10 +13,10 @@ class PaymentTable extends Component {
     { path: "payment", label: "Payment (LKR)" },
 
     {
-      key: "button",
+      key: "link",
       content: (payment) => (
         <Link
-          to={{ pathname: `/payment-summary`, payments: payment }}
+          to={{ pathname: `/profit-summary`, payments: payment }}
           onClick={() => this.context.handlePurchase(payment)}
         >
           more...
@@ -37,4 +37,4 @@ class PaymentTable extends Component {
     );
   }
 }
-export default PaymentTable;
+export default ProfitTable;

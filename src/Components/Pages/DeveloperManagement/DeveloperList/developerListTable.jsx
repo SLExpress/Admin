@@ -2,8 +2,15 @@ import React, { Component } from "react";
 import { Buttons } from "../../../Common/buttons";
 import { IButton } from "../../../Common/icon";
 import Tables from "../../../Common/tables";
+import { Link } from "react-router-dom";
 
 class DeveloperListTable extends Component {
+  myFunction(developer) {
+    this.props.onDetails(developer);
+    this.props.onSells(developer);
+    // this.context.handleWebsites(developer);
+  }
+
   columns = [
     { path: "username", label: "Username" },
     { path: "email", label: "E-mail" },
@@ -11,15 +18,17 @@ class DeveloperListTable extends Component {
     {
       key: "details",
       content: (developer) => (
-        <Buttons
-          onSubmit={() => this.props.onDelete(developer)}
-          name="Details"
-          color="#40a3dc"
-        />
+        <Link to={`/developer-details`}>
+          <Buttons
+            onSubmit={() => this.myFunction(developer)}
+            name="Details"
+            color="#40a3dc"
+          />
+        </Link>
       ),
     },
     {
-      key: "button",
+      key: "buttons",
       content: (developer) => (
         <IButton
           onSubmit={() => this.props.onDelete(developer)}

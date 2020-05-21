@@ -15,8 +15,9 @@ import { IButton } from "./../../../Common/icon";
 
 class AdminProfile extends Component {
   static contextType = CompanyContext;
+
   render() {
-    const { admin, handleAdminDelete } = this.context;
+    const { admin, handleAdminDelete, getBreadcrumb2 } = this.context;
     // console.log("location", details[0]);
 
     return (
@@ -66,19 +67,24 @@ class AdminProfile extends Component {
                         ></Grid.Column>
                         <Grid.Column mobile={10} tablet={10} computer={10}>
                           <Items data={admin} header="Admin Details" />
-                          {/* <Link to="User-List"> */}
-                          <IButtons
-                            name="Update"
-                            color="blue"
-                            icon="edit outline"
-                          />
+                          <Link
+                            to="/admin-profile/update-admin-profile"
+                            onClick={() =>
+                              getBreadcrumb2("update admin profile")
+                            }
+                          >
+                            <IButtons
+                              name="Update"
+                              color="blue"
+                              icon="edit outline"
+                            />
+                          </Link>
                           <IButtons
                             onSubmit={() => handleAdminDelete()}
                             name="Delete Account"
                             color="red"
                             icon="user delete"
                           />
-                          {/* </Link> */}
                         </Grid.Column>
                       </Grid>
                     </Grid.Column>

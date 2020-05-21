@@ -1,15 +1,15 @@
 import http from "./httpService";
 import { apiUrl } from "../Config/Config.json";
 
-const apiEndpoint = apiUrl + "/admin";
+const apiEndpoint = `${apiUrl}/admin`;
 
 /**
  * View Developers
  */
 
 export function getDevelopers() {
-  const type = { userType: "developer" };
-  return http.post(apiEndpoint + "/" + "getUsers", type);
+  const data = { userType: "developer" };
+  return http.post(`${apiEndpoint}/getUsers`, { data });
 }
 
 /**
@@ -21,7 +21,7 @@ export function deleteDeveloper(id) {
     id: id,
     type: "developer",
   };
-  return http.delete(apiEndpoint + "/" + "deleteUser", { data });
+  return http.delete(`${apiEndpoint}/deleteUser`, { data });
 }
 
 /**
@@ -29,7 +29,7 @@ export function deleteDeveloper(id) {
  */
 
 export function getScripts() {
-  return http.get(apiEndpoint + "/" + "getScripts");
+  return http.get(`${apiEndpoint}/getScripts`);
 }
 
 /**
@@ -37,9 +37,9 @@ export function getScripts() {
  */
 
 export function deleteScript(scriptid) {
-  const data = { id: scriptid };
-  // console.log("data", data);
-  return http.delete(apiEndpoint + "/" + "deleteScipt", { data });
+  const data = { scriptId: scriptid };
+  console.log("data", data);
+  return http.delete(`${apiEndpoint}/deleteScript`, { data });
 }
 
 /**
@@ -49,7 +49,7 @@ export function deleteScript(scriptid) {
 export function approveScript(scriptid) {
   console.log("scriptid", scriptid);
   const data = { scriptId: scriptid };
-  return http.patch(apiEndpoint + "/" + "approveScript", data);
+  return http.patch(`${apiEndpoint}/approveScript`, data);
 }
 
 /**
@@ -61,11 +61,11 @@ export function downloadScript(id) {
   const responseType = "blob";
 
   const ab = http
-    .post(apiEndpoint + "/" + "downloadScript", data, responseType)
+    .post(`${apiEndpoint}/downloadScript`, data, responseType)
 
     .then((response) => {
       const url = window.URL.createObjectURL(
-        new Blob([response.data], { type: "application/zip" })
+        new Blob([response], { type: "application/zip" })
       );
       const link = document.createElement("a");
       link.href = url;
@@ -85,18 +85,18 @@ export function downloadScript(id) {
  */
 
 export function getTickets() {
-  return http.get(apiEndpoint + "/" + "getTickets");
+  return http.get(`${apiEndpoint}/getTickets`);
 }
 
 export function viewInquiries(ticketid) {
   const id = { ticketId: ticketid };
-  return http.post(apiEndpoint + "/" + "getTicket", id);
+  return http.post(`${apiEndpoint}/getTicket`, id);
 }
 
 export function replyTickets(msg, id) {
   console.log("ticketid", msg, id);
   const data = { reply: msg, ticketId: id };
-  return http.put(apiEndpoint + "/" + "ticketReply", data);
+  return http.put(`${apiEndpoint}/ticketReply`, data);
 }
 
 /**
@@ -106,7 +106,7 @@ export function replyTickets(msg, id) {
 export function getPayments(period) {
   console.log("ticketid", period);
   const data = { month: period.month, year: period.year };
-  return http.post(apiEndpoint + "/" + "getEarnings", data);
+  return http.post(`${apiEndpoint}/getEarnings`, data);
 }
 
 /**
@@ -115,5 +115,5 @@ export function getPayments(period) {
 
 export function getPurchase(id) {
   const data = { purchaseId: id };
-  return http.post(apiEndpoint + "/" + "getPurchase", data);
+  return http.post(`${apiEndpoint}/getPurchase`, data);
 }

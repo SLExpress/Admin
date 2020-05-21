@@ -10,6 +10,13 @@ class TableBody extends Component {
     if (column.content) return column.content(item);
     else if (column.date)
       return <Moment format="DD/MM/YYYY ">{_.get(item, column.date)}</Moment>;
+    else if (column.link)
+      return (
+        <a href={"http://" + _.get(item, column.link)}>
+          {" "}
+          {_.get(item, column.link)}
+        </a>
+      );
     else if (column.id) {
       const id = _.get(item, column.id);
       const name = this.props.id.filter((n) => n.id == id);
@@ -33,7 +40,15 @@ class TableBody extends Component {
   };
 
   createKey = (item, column) => {
-    return item._id + (column.path || column.key);
+    return (
+      item._id +
+      (column.path ||
+        column.key ||
+        column.id ||
+        column.date ||
+        column.link ||
+        column.count)
+    );
   };
 
   render() {

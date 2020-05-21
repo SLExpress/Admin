@@ -5,32 +5,36 @@ import {
   StyleGrid,
   StyleColumn,
 } from "../../../Common/CommonStyle";
-import { CustomerContext } from "../../../../context/customersContext";
-import IncomeForm from "./incomeForm";
-import IncomeTable from "./incomeTable";
+import { DeveloperContext } from "../../../../context/developersContext";
+import ProfitForm from "./profitForm";
+import ProfitTable from "./profitTable";
 import Pagination from "../../../Common/pagination";
 import { paginate } from "../../../Common/paginate";
 import { Loading } from "../../../Common/icon";
 import _ from "lodash";
-import IncomePdf from "./incomePdf";
+import ProfitPdf from "./profitPdf";
 
-class Income extends Component {
-  static contextType = CustomerContext;
+class Profit extends Component {
+  static contextType = DeveloperContext;
 
-  renderTotalIncome(income) {
-    let totalIncome = 0;
-    income.map((t) => {
-      totalIncome += parseInt(t.payment);
+  renderTotalpayment(payment) {
+    let totalPayment = 0;
+    payment.map((t) => {
+      totalPayment += parseInt(t.payment);
+
+      //   console.log("totalincome", totalIncome);
     });
+    // for(var i = 0 ; i<= income.length; i++){
+    console.log("totalPayment", totalPayment);
 
-    console.log("totalIncome", totalIncome);
+    // }
 
-    return totalIncome;
+    return totalPayment;
   }
 
   render() {
     const {
-      income,
+      payments,
       handlePageChange,
       handlePreviousPageChange,
       handleNextPageChange,
@@ -43,21 +47,21 @@ class Income extends Component {
       sortColumn,
     } = this.context;
 
-    // const { length: count } = income;
+    // const { length: count } = payments;
 
-    let filtered = income;
+    let filtered = payments;
     if (searchQuery)
-      filtered = income.filter((i) =>
-        i.customer.toLowerCase().startsWith(searchQuery.toLowerCase())
+      filtered = payments.filter((i) =>
+        i.developer.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
-    const allIncome = paginate(sorted, currentPage, pageSize);
+    const allPayments = paginate(sorted, currentPage, pageSize);
     const { length: totalCount } = filtered;
 
     if (loading) {
       return <Loading />;
     }
-    console.log("INCOME", income);
+    console.log("allPayments", allPayments);
     return (
       <Grid.Column
         mobile={13}
@@ -69,7 +73,7 @@ class Income extends Component {
         // style={{ overflowX: "scroll" }}
         >
           <Grid.Column mobile={16} tablet={16} computer={16}>
-            <TitleWapper>Income</TitleWapper>
+            <TitleWapper>Profit</TitleWapper>
             <Grid>
               <Grid.Column mobile={2} tablet={2} computer={2}></Grid.Column>
               <StyleColumn
@@ -78,12 +82,12 @@ class Income extends Component {
                 computer={12}
                 style={{ marginBottom: "15rem" }}
               >
-                <IncomeForm />
+                <ProfitForm />
 
-                {income && (
+                {payments && (
                   <>
-                    <IncomeTable
-                      incomes={allIncome}
+                    <ProfitTable
+                      payments={allPayments}
                       currentPage={currentPage}
                       sortColumn={sortColumn}
                       onSort={handleSort}
@@ -99,13 +103,12 @@ class Income extends Component {
                     />
                   </>
                 )}
-
-                <IncomePdf
-                  data={income}
-                  total={this.renderTotalIncome(income)}
+                <ProfitPdf
+                  data={payments}
+                  total={this.renderTotalpayment(payments)}
                 />
                 <Header as="h3">
-                  Total = Rs.{this.renderTotalIncome(income)} /=
+                  Total = Rs.{this.renderTotalpayment(payments)} /=
                 </Header>
               </StyleColumn>
             </Grid>
@@ -115,4 +118,5 @@ class Income extends Component {
     );
   }
 }
-export default Income;
+
+export default Profit;

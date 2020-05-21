@@ -1,7 +1,7 @@
 import http from "./httpService";
 import { apiUrl } from "../Config/Config.json";
 
-const apiEndpoint = apiUrl + "/admin";
+const apiEndpoint = `${apiUrl}/admin`;
 
 /**
  * Get Customers
@@ -9,7 +9,7 @@ const apiEndpoint = apiUrl + "/admin";
 
 export function getCustomers() {
   const type = { userType: "customer" };
-  return http.post(apiEndpoint + "/" + "getUsers", type);
+  return http.post(`${apiEndpoint}/getUsers`, type);
 }
 
 /**
@@ -21,7 +21,7 @@ export function deleteCustomer(id) {
     id: id,
     type: "customer",
   };
-  return http.delete(apiEndpoint + "/" + "deleteUser", { data });
+  return http.delete(`${apiEndpoint}/deleteUser`, { data });
 }
 
 /**
@@ -30,7 +30,7 @@ export function deleteCustomer(id) {
 
 export function getSites() {
   // const type = { userType: "customer" };
-  return http.get(apiEndpoint + "/" + "getCreatedWebsites");
+  return http.get(`${apiEndpoint}/getCreatedWebsites`);
 }
 
 /**
@@ -51,19 +51,19 @@ export function getSites() {
 
 export function getTickets() {
   // const type = { userType: "developer" };
-  return http.get(apiEndpoint + "/" + "getTickets");
+  return http.get(`${apiEndpoint}/getTickets`);
 }
 
 export function viewInquiries(ticketid) {
   //console.log("ticketid", ticketid);
   const id = { ticketId: ticketid };
-  return http.post(apiEndpoint + "/" + "getTicket", id);
+  return http.post(`${apiEndpoint}/getTicket`, id);
 }
 
 export function replyTickets(msg, id) {
   console.log("ticketid", msg, id);
   const data = { reply: msg, ticketId: id };
-  return http.put(apiEndpoint + "/" + "ticketReply", data);
+  return http.put(`${apiEndpoint}/ticketReply`, data);
 }
 
 /**
@@ -73,5 +73,5 @@ export function replyTickets(msg, id) {
 export function getEarnings(period) {
   console.log("ticketid", period);
   const data = { month: period.month, year: period.year };
-  return http.post(apiEndpoint + "/" + "getEarnings", data);
+  return http.post(`${apiEndpoint}/getEarnings`, data);
 }

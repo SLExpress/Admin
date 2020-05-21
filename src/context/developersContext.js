@@ -23,13 +23,16 @@ const DeveloperContext = React.createContext();
 class DeveloperProvider extends Component {
   state = {
     developers: [],
-    // SingleDev: "",
+    singleDeveloper: "",
     scripts: [],
+    singleScript: [],
     buyers: [],
+    // singleBuyers: [],
     webSites: [],
     tickets: [],
     openTicket: "",
     inquiry: [],
+    divMsg: [],
     sortDevMsg: [],
     sortAdminMsg: [],
     sortAllMsg: [],
@@ -132,27 +135,56 @@ class DeveloperProvider extends Component {
       });
   };
 
+  handleDeveloperrDetails = (developer) => {
+    console.log("developer", developer);
+    const single = this.state.developers.filter((c) => c._id === developer._id);
+    if (single[0].businessUser) single[0].businessUser = "Yes";
+    else single[0].businessUser = "No";
+    if (single[0].confirmed) single[0].confirmed = "Confirmed";
+    else single[0].confirmed = "Not Confirmed";
+
+    const singleDeveloper = {
+      BusinessUser: single[0].businessUser,
+      Confirmed: single[0].confirmed,
+      Email: single[0].email,
+      First_Name: single[0].firstName,
+      Last_Name: single[0].lastName,
+      Phone: single[0].phone,
+      Username: single[0].username,
+    };
+    this.setState({ singleDeveloper, loading: false });
+  };
+
+  handleSells = (developer) => {
+    var singleScript = this.state.scripts.filter(
+      (s) => s.developerId === developer._id
+    );
+    // console.log("singleScript", singleScript);
+    this.setState({ singleScript, loading: false });
+  };
+
   /**
    * Scripts List
    */
 
   async scriptList() {
     const { data: scriptList } = await getScripts();
-
+    console.log("scriptList", scriptList);
     var scr = scriptList.scripts.map((s) => {
-      var dev = this.state.developers.filter((d) => d._id == s.developer);
-      if (dev.length == 0) dev.firstName = "Not Found";
+      var dev = this.state.developers.filter((d) => d._id === s.developer);
+      if (dev.length === 0) dev.firstName = "Not Found";
       else dev.firstName = dev[0].firstName;
       return {
         addedDate: s.addedDate,
         approved: s.approved,
+        developerId: s.developer,
         description: s.description,
         developer: dev.firstName,
         id: s.id,
         image: s.image,
         name: s.name,
         price: s.price,
-        size: s.size,
+        size: (s.size / 1048576).toFixed(2) + "Mb",
       };
     });
     this.setState({ scripts: scr });
@@ -163,13 +195,14 @@ class DeveloperProvider extends Component {
   }
 
   handleScriptDelete = async (developerSite) => {
+    console.log("developerSite", developerSite);
     const scripts = this.state.scripts.filter(
-      (ds) => ds._id !== developerSite._id
+      (ds) => ds.id !== developerSite.id
     );
     this.setState({ scripts });
 
     try {
-      await deleteScript(developerSite._id);
+      await deleteScript(developerSite.id);
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         toast.error("This site has already been deleted.");
@@ -242,7 +275,16 @@ class DeveloperProvider extends Component {
       const { data: inquiries } = await viewInquiries(id);
       this.setState({ openTicket: open });
       this.setState({ inquiry: inquiries.ticket, loading: false });
-      var DevMsg = _.orderBy(this.state.inquiry.userReplies, ["time"], ["asc"]);
+
+      var userReplies = this.state.inquiry.userReplies.map((reply) => {
+        return {
+          userReply: reply.replyId.userReply,
+          time: reply.replyId.time,
+        };
+      });
+      this.setState({ divMsg: userReplies });
+
+      var DevMsg = _.orderBy(this.state.divMsg, ["time"], ["asc"]);
       var AdminMsg = _.orderBy(
         this.state.inquiry.adminReplies,
         ["time"],
@@ -327,7 +369,7 @@ class DeveloperProvider extends Component {
           customerId: p.payments[0].customerId,
           developer: pay.developer,
           developerId: p.payments[0].developerId,
-          payment: p.payments[0].payment.$numberDecimal,
+          payment: p.payments[0].payment.$numberDecimal + ".00",
           paymentDate: p.payments[0].paymentDate,
           purchaseId: p.payments[0].purchaseId,
         };
@@ -434,11 +476,11 @@ class DeveloperProvider extends Component {
   // };
 
   render() {
-    console.log("developers", this.state.developers);
+    console.log("sortAllMsg", this.state.sortAllMsg);
     //console.log("moment2", moment("2020-04-01T19:34:07.418Z").unix());
     // console.log("state-SingleDev", this.state.SingleDev);
-    console.log("state-singlePayment", this.state.singlePayment);
-    console.log("state-singlePurchase", this.state.singlePurchase);
+    console.log("state-scripts", this.state.scripts);
+    console.log("state-buyers", this.state.buyers);
 
     return (
       <DeveloperContext.Provider
@@ -460,7 +502,8 @@ class DeveloperProvider extends Component {
           handlePurchase: this.handlePurchase,
           handlePayment: this.handlePayment,
           handlePaymentDetails: this.handlePaymentDetails,
-          handleDeveloprtDetails: this.handleDeveloprtDetails,
+          handleDeveloperrDetails: this.handleDeveloperrDetails,
+          handleSells: this.handleSells,
         }}
       >
         {this.props.children}

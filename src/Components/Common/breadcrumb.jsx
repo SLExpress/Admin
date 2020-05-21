@@ -13,7 +13,12 @@ class Breadcrumbs extends Component {
   }
 
   render() {
-    const { breadcrumb, getBreadcrumb } = this.context;
+    const {
+      breadcrumb1,
+      breadcrumb2,
+      getBreadcrumb1,
+      getBreadcrumb2,
+    } = this.context;
     return (
       <Grid style={{ background: "#e9ecef", margin: 0, padding: 0 }}>
         <Grid.Column
@@ -28,16 +33,25 @@ class Breadcrumbs extends Component {
           }}
         >
           <Breadcrumb>
-            <Link to={"/"} onClick={() => getBreadcrumb("")}>
-              <Breadcrumb.Section link>Home</Breadcrumb.Section>
+            <Link to={"/"} onClick={() => getBreadcrumb1("")}>
+              <Breadcrumb.Section>Home</Breadcrumb.Section>
             </Link>
-            <Breadcrumb.Divider />
+            {breadcrumb1 && <Breadcrumb.Divider />}
             <Breadcrumb.Section active style={{ textTransform: "capitalize" }}>
               <Link
-                to={"/" + this.renderBreadcrumb(breadcrumb)}
-                onClick={() => getBreadcrumb(breadcrumb)}
+                to={"/" + this.renderBreadcrumb(breadcrumb1)}
+                onClick={() => getBreadcrumb1(breadcrumb1)}
               >
-                {breadcrumb}
+                {breadcrumb1}
+              </Link>
+            </Breadcrumb.Section>
+            {breadcrumb2 && <Breadcrumb.Divider />}
+            <Breadcrumb.Section active style={{ textTransform: "capitalize" }}>
+              <Link
+                to={"/" + this.renderBreadcrumb(breadcrumb2)}
+                onClick={() => getBreadcrumb2(breadcrumb2)}
+              >
+                {breadcrumb2}
               </Link>
             </Breadcrumb.Section>
           </Breadcrumb>

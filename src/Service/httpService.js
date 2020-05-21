@@ -16,32 +16,46 @@ axios.interceptors.response.use(null, (error) => {
 });
 
 // axios({
-//   url: "http://slexpress.tk:3000/admin/deleteAdmin",
-//   method: "delete",
-//   // data: {
-//   //   purchaseId: "5ebf7ddbcff20e33e0247d6b",
-//   // year: "2020",
-//   //   lastname: "Saubhagyaqsd",
-//   //   email: "yasmikasyasssdhq@gmail.com",
-//   //   password: "qqqqqqqsdq",
-//   //   phone: 1501762822
-//   // },
+//   url: "http://slexpress.tk:3000/admin/downloadScript",
+//   method: "post",
+//   data: {
+//     scriptId: "5eb3b4bba053506cec1da026",
+//     // year: "2020",
+//     //   lastname: "Saubhagyaqsd",
+//     //   email: "yasmikasyasssdhq@gmail.com",
+//     //   password: "qqqqqqqsdq",
+//     //   phone: 1501762822
+//   },
 
 //   headers: {
 //     "Content-Type": "application/json",
+
+//     responseType: "blob",
 //     Authorization:
-//       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWI2NTE0MTIzYzExNDJlY2I0ZGE1ZWQiLCJlbWFpbCI6ImNjY2NAZ21haWwuY29tIiwiaWF0IjoxNTg5NzAwMTU4LCJleHAiOjE1ODk3MDM3NTh9.ajCNoXJjj4jPluCXEJyB5aiqJLadyqwhNS4IABeMKE0",
+//       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWM0YWNhNjAwYTM2ZjY0ZGM2MjI1NWUiLCJlbWFpbCI6Inp6enpAZ21haWwuY29tIiwiaWF0IjoxNTkwMDc0NDM0LCJleHAiOjE1OTAwNzgwMzR9.k_AyH1HA-BuX6j_up1kYGkff4eFTKwocI6Opa2fPOWw",
 //   },
 // })
-//   .then((response) => console.log(response))
+//   .then((response) => {
+//     const url = window.URL.createObjectURL(
+//       new Blob([response], { type: "application/zip" })
+//     );
+//     const link = document.createElement("a");
+//     link.href = url;
+//     link.setAttribute("href", url);
+//     link.setAttribute("download", "script.zip");
+//     document.body.appendChild(link);
+//     link.click();
+//     link.remove();
+//     // link.parentNode.removeChild(link);
+//   })
+
 //   .catch((error) => {
 //     console.log(error);
 //   });
-// console.log("H");
 
-export function setJwt(jwt) {
-  axios.defaults.headers.common["Authorization"] = "Bearer " + jwt;
-}
+// export function setJwt(jwt) {
+//   axios.defaults.headers.common["Authorization"] = "Bearer " + jwt;
+// }
 
 export default {
   get: axios.get,

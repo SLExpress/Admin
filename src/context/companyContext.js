@@ -4,6 +4,7 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import {
   getAdmin,
+  updateAdminProfile,
   deleteAdmin,
   getCategories,
   deleteCategory,
@@ -24,7 +25,8 @@ const CompanyContext = React.createContext();
 class CompanyProvider extends Component {
   state = {
     admin: "",
-    breadcrumb: "",
+    breadcrumb1: "",
+    breadcrumb2: "",
     ourVision: [],
     ourMission: [],
     ourToS: [],
@@ -72,10 +74,13 @@ class CompanyProvider extends Component {
     this.setState({ searchQuery: query, currentPage: 1 });
   };
 
-  getBreadcrumb = (url) => {
-    this.setState({ breadcrumb: url });
+  getBreadcrumb1 = (url1) => {
+    this.setState({ breadcrumb1: url1, breadcrumb2: "" });
   };
 
+  getBreadcrumb2 = (url2) => {
+    this.setState({ breadcrumb2: url2 });
+  };
   /**
    * Admin Profile
    */
@@ -95,6 +100,23 @@ class CompanyProvider extends Component {
     this.setState({ admin: adminDetails, loading: false });
   }
 
+  handleAdminProfileUpdate = async (data) => {
+    console.log("contexdata", data);
+    try {
+      const res = await updateAdminProfile(data);
+      Swal.fire({
+        icon: "success",
+        title: "Admin Profile Update Sucessfully..!!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      // console.log("RES", res);
+      if (res.status === 200) await this.getAdminDetails();
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        toast.error("Something Wrong...!!");
+    }
+  };
   // handleAdminDelete = async () => {
   async handleAdminDelete() {
     console.log("handleAdminDelete");
@@ -345,19 +367,21 @@ class CompanyProvider extends Component {
   }
 
   render() {
-    console.log("admin", this.state.admin);
+    console.log("breadcrumb", this.state.breadcrumb);
     return (
       <CompanyContext.Provider
         value={{
           ...this.state,
           getAdminDetails: this.getAdminDetails,
+          handleAdminProfileUpdate: this.handleAdminProfileUpdate,
           handleAdminDelete: this.handleAdminDelete,
           handlePageChange: this.handlePageChange,
           handlePreviousPageChange: this.handlePreviousPageChange,
           handleNextPageChange: this.handleNextPageChange,
           handleSort: this.handleSort,
           handleSearch: this.handleSearch,
-          getBreadcrumb: this.getBreadcrumb,
+          getBreadcrumb1: this.getBreadcrumb1,
+          getBreadcrumb2: this.getBreadcrumb2,
           handleCategoryDelete: this.handleCategoryDelete,
           handleCategoryUpdate: this.handleCategoryUpdate,
           handleCategorySave: this.handleCategorySave,

@@ -6,14 +6,14 @@ import {
   StyleColumn,
 } from "../../../Common/CommonStyle";
 import styled from "styled-components";
-import { CButtons } from "./../../../Common/buttons";
-import Forms from "./../../../Common/forms";
-import { CustomerContext } from "../../../../context/customersContext";
+import { CButtons } from "../../../Common/buttons";
+import Forms from "../../../Common/forms";
+import { DeveloperContext } from "../../../../context/developersContext";
 import Joi from "joi-browser";
 import Swal from "sweetalert2";
 
-class IncomeForm extends Forms {
-  static contextType = CustomerContext;
+class ProfitForm extends Forms {
+  static contextType = DeveloperContext;
   state = {
     data: { month: "", year: "" },
     errors: {},
@@ -27,9 +27,9 @@ class IncomeForm extends Forms {
   doSubmit = async () => {
     try {
       // const { data } = this.state;
-      await this.context.handleIncome(this.state.data);
+      await this.context.handlePayment(this.state.data);
       const { state } = this.props.location;
-      window.location = state ? state.from.pathname : "/income";
+      window.location = state ? state.from.pathname : "/payment";
     } catch (ex) {
       if (ex.response && ex.response.status === 422) {
         const errors = { ...this.state.errors };
@@ -52,6 +52,8 @@ class IncomeForm extends Forms {
             >
               {this.renderInput("month", "Month")}
             </Grid.Column>
+            {/* </Grid>
+        <Grid> */}
             <Grid.Column mobile={2} tablet={2} computer={2}></Grid.Column>
             <Grid.Column
               mobile={7}
@@ -69,7 +71,7 @@ class IncomeForm extends Forms {
     );
   }
 }
-export default IncomeForm;
+export default ProfitForm;
 
 const StyledForm = styled(Form)`
   display: flex;

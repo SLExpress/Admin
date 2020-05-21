@@ -19,6 +19,8 @@ class DeveloperList extends Component {
   render() {
     const {
       developers,
+      handleSells,
+      handleDeveloperrDetails,
       handleDeveloperDelete,
       handlePageChange,
       handlePreviousPageChange,
@@ -75,6 +77,8 @@ class DeveloperList extends Component {
                 <DeveloperListTable
                   developers={allDevelopers}
                   currentPage={currentPage}
+                  onSells={handleSells}
+                  onDetails={handleDeveloperrDetails}
                   sortColumn={sortColumn}
                   onDelete={handleDeveloperDelete}
                   onSort={handleSort}

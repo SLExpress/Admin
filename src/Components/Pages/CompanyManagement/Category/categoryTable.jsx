@@ -22,7 +22,7 @@ class CategoryTable extends Component {
     },
 
     {
-      key: "button",
+      key: "buttons",
       content: (category) => (
         <IButton
           onSubmit={() => this.props.onDelete(category)}

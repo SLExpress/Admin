@@ -10,7 +10,7 @@ class SiteListTable extends Component {
     { date: "createdDate", label: "Date" },
     { path: "customer", label: "Customer Name" },
     { id: "scriptId", label: "Site Name" },
-    { path: "defaultUrl", label: "Url" },
+    { link: "defaultUrl", label: "Url" },
     { path: "price", label: "Price" },
     {
       key: "button",

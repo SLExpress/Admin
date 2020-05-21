@@ -10,15 +10,16 @@ import PaymentForm from "./paymentForm";
 import PaymentTable from "./paymentTable";
 import Pagination from "../../../Common/pagination";
 import { paginate } from "../../../Common/paginate";
-import { SearchBar, Loading } from "../../../Common/icon";
+import { Loading } from "../../../Common/icon";
 import _ from "lodash";
+import PaymentPdf from "./paymentPdf";
 
 class Payments extends Component {
   static contextType = DeveloperContext;
 
   renderTotalpayment(payment) {
     let totalPayment = 0;
-    var total = payment.map((t) => {
+    payment.map((t) => {
       totalPayment += parseInt(t.payment);
 
       //   console.log("totalincome", totalIncome);
@@ -42,11 +43,11 @@ class Payments extends Component {
       currentPage,
       pageSize,
       searchQuery,
-      handleSearch,
+      // handleSearch,
       sortColumn,
     } = this.context;
 
-    const { length: count } = payments;
+    // const { length: count } = payments;
 
     let filtered = payments;
     if (searchQuery)
@@ -102,7 +103,10 @@ class Payments extends Component {
                     />
                   </>
                 )}
-
+                <PaymentPdf
+                  data={payments}
+                  total={this.renderTotalpayment(payments)}
+                />
                 <Header as="h3">
                   Total = Rs.{this.renderTotalpayment(payments)} /=
                 </Header>

@@ -40,6 +40,15 @@ export const StyleGrid = styled(Grid)`
   padding: 0px !importamt;
 `;
 
+export const StyleGrids = styled(Grid)`
+  background-image: url("../images/q12.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  padding: 0px !importamt;
+`;
+
 export const StyleTable = styled(Table)`
   margin: 25;
   background: white;

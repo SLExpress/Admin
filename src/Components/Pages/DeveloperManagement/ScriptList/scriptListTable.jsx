@@ -26,7 +26,7 @@ class ScriptListTable extends Component {
     },
 
     {
-      key: "button",
+      key: "buttons",
       content: (developerSite) => (
         <Buttons
           onSubmit={() => this.props.onDownloadScripts(developerSite)}
@@ -37,7 +37,7 @@ class ScriptListTable extends Component {
     },
 
     {
-      key: "button",
+      key: "delete",
       content: (developerSite) => (
         <IButton
           onSubmit={() => this.props.onDelete(developerSite)}

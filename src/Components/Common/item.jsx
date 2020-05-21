@@ -19,7 +19,7 @@ class Items extends Component {
                   <Item.Meta>{key[0]}</Item.Meta>
                 </Grid.Column>
                 <Grid.Column mobile={8} tablet={8} computer={8}>
-                  <Item.Meta style={{ color: "rgba(0,0,0,.4)" }}>
+                  <Item.Meta style={{ color: "rgba(0,0,0,.9)" }}>
                     {key[1]}
                   </Item.Meta>
                 </Grid.Column>

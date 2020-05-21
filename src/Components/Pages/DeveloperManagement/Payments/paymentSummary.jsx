@@ -14,6 +14,7 @@ import { CustomerContext } from "../../../../context/customersContext";
 import { DeveloperContext } from "../../../../context/developersContext";
 import { IButton } from "../../../Common/icon";
 import Payment from "./payments";
+import PaymentPdf from "./paymentPdf";
 
 class PaymentSummary extends Component {
   static contextType = DeveloperContext;
@@ -43,7 +44,7 @@ class PaymentSummary extends Component {
       >
         <StyleGrid>
           <Grid.Column mobile={16} tablet={16} computer={16}>
-            <TitleWapper>Payment Report</TitleWapper>
+            <TitleWapper>Payment Summary</TitleWapper>
             <Grid>
               <Grid.Column mobile={1} tablet={1} computer={1}></Grid.Column>
               <StyleColumn
@@ -74,6 +75,7 @@ class PaymentSummary extends Component {
                         </Grid.Column>
                       </Grid>
                       <Items data={singlePayment} header="Developer Details" />
+
                       <Link to="payments">
                         <IButton name="angle double left" />
                       </Link>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 import {
   TitleWapper,
-  StyleGrid,
+  StyleGrids,
   StyleColumn,
 } from "../../../Common/CommonStyle";
 import { CustomerContext } from "../../../../context/customersContext";
@@ -26,7 +26,7 @@ class CustomerInquiries extends Component {
         computer={13}
         style={{ animation: "fadeIn 1s ease-in" }}
       >
-        <StyleGrid>
+        <StyleGrids>
           <Grid.Column mobile={16} tablet={16} computer={16}>
             <TitleWapper>Customer Inquiries</TitleWapper>
             <Grid>
@@ -47,7 +47,7 @@ class CustomerInquiries extends Component {
               </StyleColumn>
             </Grid>
           </Grid.Column>
-        </StyleGrid>
+        </StyleGrids>
       </Grid.Column>
     );
   }

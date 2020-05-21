@@ -13,7 +13,7 @@ import auth from "../Service/authAdminService";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import Moment from "react-moment";
+// import Moment from "react-moment";
 
 const CustomerContext = React.createContext();
 
@@ -128,7 +128,7 @@ class CustomerProvider extends Component {
 
   handleCustomerDetails = (customer) => {
     console.log("cus", customer);
-    const single = this.state.customers.filter((c) => c._id == customer._id);
+    const single = this.state.customers.filter((c) => c._id === customer._id);
     if (single[0].businessUser) single[0].businessUser = "Yes";
     else single[0].businessUser = "No";
     if (single[0].confirmed) single[0].confirmed = "Confirmed";
@@ -149,8 +149,8 @@ class CustomerProvider extends Component {
   handlePurchases = (customer) => {
     // console.log("customer", customer);
     var purchases = customer.websites.map((w) => {
-      const pur = this.state.sites.filter((s) => s.id == w);
-      if (pur.length == 0) {
+      const pur = this.state.sites.filter((s) => s.id === w);
+      if (pur.length === 0) {
         pur.createdDate = "Not Found";
         pur.customUrl = "Not Found";
         pur.customer = "Not Found";
@@ -196,9 +196,9 @@ class CustomerProvider extends Component {
     const { data: sites } = await getSites();
     console.log("SITESS", sites);
     var siteList = sites.map((s) => {
-      var cus = this.state.customers.filter((c) => c._id == s.customerId);
+      var cus = this.state.customers.filter((c) => c._id === s.customerId);
       // var web = this.state.sites.filter((w) => c._id == s.customerId);
-      if (cus.length == 0) cus.firstName = "Not Found";
+      if (cus.length === 0) cus.firstName = "Not Found";
       else cus.firstName = cus[0].firstName;
       return {
         createdDate: s.createdDate,
@@ -307,14 +307,14 @@ class CustomerProvider extends Component {
       var payments = income.map((i) => {
         // console.log("INCMAP", i);
         var inc = this.state.customers.filter(
-          (c) => c._id == i.payments[0].customerId
+          (c) => c._id === i.payments[0].customerId
         );
         if (inc[0].businessUser) inc[0].businessUser = "Yes";
         else inc[0].businessUser = "No";
         if (inc[0].confirmed) inc[0].confirmed = "Confirmed";
         else inc[0].confirmed = "Not Confirmed";
         console.log("inc", inc[0]);
-        if (inc.length == 0) {
+        if (inc.length === 0) {
           inc.customer = i.payments[0].customerId;
           inc.customerId = i.payments[0].customerId;
           inc.developerId = i.payments[0].developerId;
@@ -341,11 +341,7 @@ class CustomerProvider extends Component {
       });
       console.log("payments", payments);
       this.setState({ income: payments });
-      const NewIncomes = _.orderBy(
-        this.state.income,
-        ["paymentDate"],
-        ["desc"]
-      );
+      const NewIncomes = _.orderBy(this.state.income, ["paymentDate"], ["ssc"]);
       this.setState({ income: NewIncomes, loading: false });
       console.log("payments", this.state.income);
 
@@ -370,7 +366,7 @@ class CustomerProvider extends Component {
   handleIncomeDetails = async (data) => {
     // console.log("SUMMARY", data);
     var incomeDetails = this.state.customers.filter(
-      (c) => c._id == data.customerId
+      (c) => c._id === data.customerId
     );
     console.log("incomeDetails", incomeDetails.businessUser);
     if (incomeDetails[0].businessUser) incomeDetails[0].businessUser = "Yes";
@@ -379,7 +375,7 @@ class CustomerProvider extends Component {
     if (incomeDetails[0].confirmed) incomeDetails[0].confirmed = "Yes";
     else incomeDetails[0].confirmed = "No";
 
-    if (incomeDetails.length == 0) {
+    if (incomeDetails.length === 0) {
       incomeDetails.businessUser = "Not Found";
       incomeDetails.confirmed = "Not Found";
       incomeDetails.email = "Not Found";
@@ -405,7 +401,7 @@ class CustomerProvider extends Component {
   };
 
   render() {
-    console.log("currentPage", this.state.singleIncome);
+    console.log("sortAllMsg", this.state.sortAllMsg);
     return (
       <CustomerContext.Provider
         value={{
@@ -423,8 +419,8 @@ class CustomerProvider extends Component {
           handleReply: this.handleReply,
           handleIncome: this.handleIncome,
           handleIncomeDetails: this.handleIncomeDetails,
-          setOpen: this.setOpen,
-          getOpen: this.getOpen,
+          // setOpen: this.setOpen,
+          // getOpen: this.getOpen,
         }}
       >
         {this.props.children}

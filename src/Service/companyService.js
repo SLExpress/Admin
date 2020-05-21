@@ -2,7 +2,7 @@ import http from "./httpService";
 import auth from "../Service/authAdminService";
 import { apiUrl } from "../Config/Config.json";
 
-const apiEndpoint = apiUrl + "/admin";
+const apiEndpoint = `${apiUrl}/admin`;
 
 /**
  * Get Admin Profile
@@ -11,9 +11,21 @@ const apiEndpoint = apiUrl + "/admin";
 export function getAdmin() {
   try {
     if (auth.getCurrentAdmin()) {
-      return http.get(apiEndpoint + "/" + "getAdmin");
+      return http.get(`${apiEndpoint}/getAdmin`);
     }
   } catch (ex) {}
+}
+
+export function updateAdminProfile(text) {
+  console.log("updateAdminProfile", text);
+  const data = {
+    username: text.username,
+    email: text.email,
+    firstName: text.firstName,
+    lastName: text.lastName,
+    phone: text.phone,
+  };
+  return http.patch(`${apiEndpoint}/updateAdmin`, data);
 }
 
 /**
@@ -25,7 +37,7 @@ export function deleteAdmin() {
   // const data = { categoryId: id };
   // console.log(data);
 
-  return http.delete(apiEndpoint + "/" + "deleteAdmin");
+  return http.delete(`${apiEndpoint}/deleteAdmin`);
 }
 
 /**
@@ -35,7 +47,7 @@ export function deleteAdmin() {
 export function getCategories() {
   try {
     if (auth.getCurrentAdmin()) {
-      return http.get(apiEndpoint + "/" + "getCategories");
+      return http.get(`${apiEndpoint}/getCategories`);
     }
   } catch (ex) {}
 }
@@ -47,7 +59,7 @@ export function deleteCategory(id) {
   const data = { categoryId: id };
   console.log(data);
 
-  return http.delete(apiEndpoint + "/" + "deleteCategory", { data });
+  return http.delete(`${apiEndpoint}/deleteCategory`, { data });
 }
 
 /**
@@ -59,12 +71,12 @@ export function saveCategory(category) {
       categoryId: category._id,
       name: category.name,
     };
-    return http.patch(apiEndpoint + "/" + "updateCategory ", data);
+    return http.patch(`${apiEndpoint}/updateCategory`, data);
   }
   const data = {
     name: category.name,
   };
-  return http.put(apiEndpoint + "/" + "addCategory", data);
+  return http.put(`${apiEndpoint}/addCategory`, data);
 }
 
 /**
@@ -74,7 +86,7 @@ export function saveCategory(category) {
 
 export function getMission() {
   try {
-    return http.get(apiEndpoint + "/" + "getMission");
+    return http.get(`${apiEndpoint}/getMission`);
   } catch (ex) {}
 }
 
@@ -82,7 +94,7 @@ export function updateMission(text) {
   const data = {
     content: text,
   };
-  return http.patch(apiEndpoint + "/" + "updateMission ", data);
+  return http.patch(`${apiEndpoint}/updateMission`, data);
 }
 
 /**
@@ -92,7 +104,7 @@ export function updateMission(text) {
 
 export function getVision() {
   try {
-    return http.get(apiEndpoint + "/" + "getVision");
+    return http.get(`${apiEndpoint}/getVision`);
   } catch (ex) {}
 }
 
@@ -100,7 +112,7 @@ export function updateVision(text) {
   const data = {
     content: text,
   };
-  return http.patch(apiEndpoint + "/" + "updateVision ", data);
+  return http.patch(`${apiEndpoint}/updateVision`, data);
 }
 
 /**
@@ -110,7 +122,7 @@ export function updateVision(text) {
 
 export function getToS() {
   try {
-    return http.get(apiEndpoint + "/" + "getToS");
+    return http.get(`${apiEndpoint}/getToS`);
   } catch (ex) {}
 }
 
@@ -118,7 +130,7 @@ export function updateToS(text) {
   const data = {
     content: text,
   };
-  return http.patch(apiEndpoint + "/" + "updateToS ", data);
+  return http.patch(`${apiEndpoint}/updateToS`, data);
 }
 
 /**
@@ -128,7 +140,7 @@ export function updateToS(text) {
 
 export function getContactDetails() {
   try {
-    return http.get(apiEndpoint + "/" + "getCompanyDetails");
+    return http.get(`${apiEndpoint}/getCompanyDetails`);
   } catch (ex) {}
 }
 
@@ -141,5 +153,5 @@ export function updateContactDetails(text) {
     hours: { opening: text.opening, closing: text.closing },
     email: text.email,
   };
-  return http.patch(apiEndpoint + "/" + "updateCompanyDetails ", data);
+  return http.patch(`${apiEndpoint}/updateCompanyDetails`, data);
 }

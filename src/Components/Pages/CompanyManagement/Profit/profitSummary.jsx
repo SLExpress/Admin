@@ -11,16 +11,29 @@ import { Buttons, ButtonGroup } from "../../../Common/buttons";
 import { Link } from "react-router-dom";
 import Items from "../../../Common/item";
 import { CustomerContext } from "../../../../context/customersContext";
-import CustomerPurchases from "./customerPurchases";
-import { IButton } from "./../../../Common/icon";
+import { DeveloperContext } from "../../../../context/developersContext";
+import { IButton } from "../../../Common/icon";
 
-class UserDetails extends Component {
-  static contextType = CustomerContext;
+class ProfitSummary extends Component {
+  static contextType = DeveloperContext;
+
+  componentDidMount = () => {
+    this.context.handlePaymentDetails(this.props.location.payments);
+    // this.context.handleDeveloprtDetails(this.props.location.payments);
+  };
+
   render() {
-    const { singleCustomer } = this.context;
-    // console.log("location", details[0]);
-
+    const { singlePurchase, singlePayment } = this.context;
+    console.log("singlePayment");
+    // const { incomes } = this.props;
+    console.log("income-location", this.props.location.payments);
     return (
+      // <DeveloperContext.Consumer>
+      //   {(customerContext) => (
+      //     <CustomerContext.Consumer>
+      //       {(developerContext) => {
+      //         const { singlePurchase, singlePayment } = this.context;
+      //         return (
       <Grid.Column
         mobile={13}
         tablet={13}
@@ -29,7 +42,7 @@ class UserDetails extends Component {
       >
         <StyleGrid>
           <Grid.Column mobile={16} tablet={16} computer={16}>
-            <TitleWapper>User Details</TitleWapper>
+            <TitleWapper>Profit Summary</TitleWapper>
             <Grid>
               <Grid.Column mobile={1} tablet={1} computer={1}></Grid.Column>
               <StyleColumn
@@ -53,19 +66,20 @@ class UserDetails extends Component {
                         ></Grid.Column>
                         <Grid.Column mobile={6} tablet={6} computer={6}>
                           <Image
-                            src="https://react.semantic-ui.com/images/avatar/large/stevie.jpg"
+                            src="https://react.semantic-ui.com/images/avatar/small/christian.jpg"
                             size="small"
                             circular
                           />
                         </Grid.Column>
                       </Grid>
-                      <Items data={singleCustomer} header="Personal Details" />
-                      <Link to="user-list">
+                      <Items data={singlePayment} header="Developer Details" />
+
+                      <Link to="profit">
                         <IButton name="angle double left" />
                       </Link>
                     </Grid.Column>
                     <Grid.Column>
-                      <CustomerPurchases />
+                      <Items data={singlePurchase} header="Purchase Summary" />
                     </Grid.Column>
                   </Grid>
 
@@ -76,15 +90,12 @@ class UserDetails extends Component {
           </Grid.Column>
         </StyleGrid>
       </Grid.Column>
+      //         );
+      //       }}
+      //     </CustomerContext.Consumer>
+      //   )}
+      // </DeveloperContext.Consumer>
     );
   }
 }
-export default UserDetails;
-
-const StyledForm = styled(Form)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 25px;
-`;
+export default ProfitSummary;

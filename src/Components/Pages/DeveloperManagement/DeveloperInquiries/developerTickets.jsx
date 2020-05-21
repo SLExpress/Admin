@@ -31,7 +31,7 @@ class DeveloperTickets extends Component {
                 <Ticket
                   tickets={tickets}
                   handleInquiries={handleInquiries}
-                  link="developer"
+                  link="developer-inquiries"
                 />
               </Grid.Column>
             </Grid>

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { Grid, Form } from "semantic-ui-react";
 import styled from "styled-components";
 import {
   TitleWapper,
-  StyleGrid,
+  StyleGrids,
   StyleColumn,
 } from "./../../../Common/CommonStyle";
 import Forms from "../../../Common/forms";
@@ -53,7 +53,7 @@ class CategoryForm extends Forms {
   };
 
   render() {
-    const { open, size, close } = this.context;
+    // const { open, size, close } = this.context;
     // console.log("Title", this.state.title);
     // console.log("param", this.props.match.params.id);
     return (
@@ -64,7 +64,7 @@ class CategoryForm extends Forms {
           computer={13}
           style={{ animation: "fadeIn 1s ease-in" }}
         >
-          <StyleGrid>
+          <StyleGrids>
             <Grid.Column mobile={16} tablet={16} computer={16}>
               <TitleWapper>{this.state.data.title}</TitleWapper>
               <Grid>
@@ -77,7 +77,7 @@ class CategoryForm extends Forms {
                 </StyleColumn>
               </Grid>
             </Grid.Column>
-          </StyleGrid>
+          </StyleGrids>
         </Grid.Column>
       </>
     );

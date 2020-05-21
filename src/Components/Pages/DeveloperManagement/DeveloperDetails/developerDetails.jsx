@@ -10,14 +10,14 @@ import {
 import { Buttons, ButtonGroup } from "../../../Common/buttons";
 import { Link } from "react-router-dom";
 import Items from "../../../Common/item";
-import { CustomerContext } from "../../../../context/customersContext";
-import CustomerPurchases from "./customerPurchases";
+import { DeveloperContext } from "../../../../context/developersContext";
 import { IButton } from "./../../../Common/icon";
+import DeveloperSells from "./developerSells";
 
-class UserDetails extends Component {
-  static contextType = CustomerContext;
+class DeveloperDetails extends Component {
+  static contextType = DeveloperContext;
   render() {
-    const { singleCustomer } = this.context;
+    const { singleDeveloper } = this.context;
     // console.log("location", details[0]);
 
     return (
@@ -29,7 +29,7 @@ class UserDetails extends Component {
       >
         <StyleGrid>
           <Grid.Column mobile={16} tablet={16} computer={16}>
-            <TitleWapper>User Details</TitleWapper>
+            <TitleWapper>Developer Details</TitleWapper>
             <Grid>
               <Grid.Column mobile={1} tablet={1} computer={1}></Grid.Column>
               <StyleColumn
@@ -53,19 +53,19 @@ class UserDetails extends Component {
                         ></Grid.Column>
                         <Grid.Column mobile={6} tablet={6} computer={6}>
                           <Image
-                            src="https://react.semantic-ui.com/images/avatar/large/stevie.jpg"
+                            src="https://react.semantic-ui.com/images/avatar/small/matt.jpg"
                             size="small"
                             circular
                           />
                         </Grid.Column>
                       </Grid>
-                      <Items data={singleCustomer} header="Personal Details" />
-                      <Link to="user-list">
+                      <Items data={singleDeveloper} header="Personal Details" />
+                      <Link to="developer-list">
                         <IButton name="angle double left" />
                       </Link>
                     </Grid.Column>
                     <Grid.Column>
-                      <CustomerPurchases />
+                      <DeveloperSells />
                     </Grid.Column>
                   </Grid>
 
@@ -79,7 +79,7 @@ class UserDetails extends Component {
     );
   }
 }
-export default UserDetails;
+export default DeveloperDetails;
 
 const StyledForm = styled(Form)`
   display: flex;

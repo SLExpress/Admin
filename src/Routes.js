@@ -12,6 +12,9 @@ import CategoryForm from "./Components/Pages/CompanyManagement/Category/category
 import AdminSignIn from "./Components/Pages/CompanyManagement/AdminSignIn/adminSignIn";
 import AdminSignUp from "./Components/Pages/CompanyManagement/AdminSignUp/adminSignUp";
 import AdminProfile from "./Components/Pages/CompanyManagement/AdminProfile/adminProfile";
+import UpdateAdminProfile from "./Components/Pages/CompanyManagement/AdminProfile/updateProfile";
+import Profit from "./Components/Pages/CompanyManagement/Profit/profit";
+import ProfitSummary from "./Components/Pages/CompanyManagement/Profit/profitSummary";
 
 import CustomerList from "./Components/Pages/CustomerManagement/CustomerList/customerList";
 import SiteList from "./Components/Pages/CustomerManagement/SiteList/siteList";
@@ -28,6 +31,7 @@ import Payments from "./Components/Pages/DeveloperManagement/Payments/payments";
 import PaymentSummary from "./Components/Pages/DeveloperManagement/Payments/paymentSummary";
 import DeveloperTickets from "./Components/Pages/DeveloperManagement/DeveloperInquiries/developerTickets";
 import DeveloperInquiries from "./Components/Pages/DeveloperManagement/DeveloperInquiries/developerInquiries";
+import DeveloperDetails from "./Components/Pages/DeveloperManagement/DeveloperDetails/developerDetails";
 
 import BusinessUserList from "./Components/Pages/BusinessPlanManagement/BusinessUserList/businessUserList";
 import QuestionsAdding from "./Components/Pages/BusinessPlanManagement/QuestionAdding/questionsAdding";
@@ -47,7 +51,13 @@ const Routes = () => {
       <Route path="/admin-sign-in" component={AdminSignIn} />
       <Route path="/log-out" component={LogOut} />
       <Route path="/admin-sign-up" component={AdminSignUp} />
+      <Route
+        path="/admin-profile/update-admin-profile"
+        component={UpdateAdminProfile}
+      />
       <Route path="/admin-profile" component={AdminProfile} />
+      <Route path="/profit" component={Profit} />
+      <Route path="/profit-summary" component={ProfitSummary} />
 
       <Route path="/user-list" component={CustomerList} />
       <Route path="/site-list" component={SiteList} />
@@ -64,6 +74,7 @@ const Routes = () => {
       <Route path="/payment-summary" component={PaymentSummary} />
       <Route path="/developer-tickets" component={DeveloperTickets} />
       <Route path="/developer-inquiries/:id" component={DeveloperInquiries} />
+      <Route path="/developer-details" component={DeveloperDetails} />
 
       <Route path="/business-user-list" component={BusinessUserList} />
       <Route path="/question-adding" component={QuestionsAdding} />

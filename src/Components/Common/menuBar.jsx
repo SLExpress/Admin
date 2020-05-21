@@ -21,7 +21,7 @@ class MenuBar extends Component {
   render() {
     // const { activeItem } = this.state;
     // console.log("activeItem", this.state.activeItem);
-    const { getBreadcrumb } = this.context;
+    const { getBreadcrumb1 } = this.context;
     return (
       <Grid.Column mobile={3} tablet={3} computer={3}>
         <Menu text pointing secondary vertical>
@@ -31,22 +31,20 @@ class MenuBar extends Component {
 
               <Menu.Menu>
                 {menu.list.map((item) => (
-                  <>
-                    <Menu.Item key={item.name}>
-                      <StyleMenuItem
-                        to={"/" + this.renderUrl(item.name)}
-                        onClick={() => getBreadcrumb(item.name)}
-                        // active={activeItem === item}
-                        // onClick={() => this.handleItemClick(item)}
-                      >
-                        {/* {this.setUrl(item.name)} */}
+                  <Menu.Item key={item.name}>
+                    <StyleMenuItem
+                      to={"/" + this.renderUrl(item.name)}
+                      onClick={() => getBreadcrumb1(item.name)}
+                      // active={activeItem === item}
+                      // onClick={() => this.handleItemClick(item)}
+                    >
+                      {/* {this.setUrl(item.name)} */}
 
-                        <Icon circular inverted color="teal" name={item.icon} />
+                      <Icon circular inverted color="teal" name={item.icon} />
 
-                        {item.name}
-                      </StyleMenuItem>
-                    </Menu.Item>
-                  </>
+                      {item.name}
+                    </StyleMenuItem>
+                  </Menu.Item>
                 ))}
               </Menu.Menu>
             </Menu.Item>

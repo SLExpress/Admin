@@ -32,7 +32,7 @@ class CustomerTickets extends Component {
                 <Ticket
                   tickets={tickets}
                   handleInquiries={handleInquiries}
-                  link="customer"
+                  link="customer-inquiries"
                 />
               </Grid.Column>
             </Grid>

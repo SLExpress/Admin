@@ -26,7 +26,7 @@ class TableHeader extends Component {
     return (
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell key="No">No</Table.HeaderCell>
+          <Table.HeaderCell>No</Table.HeaderCell>
           {this.props.columns.map((column) => (
             <Table.HeaderCell
               key={
@@ -34,7 +34,8 @@ class TableHeader extends Component {
                 column.id ||
                 column.count ||
                 column.date ||
-                column.key
+                column.key ||
+                column.link
               }
               onClick={() => this.raiseSort(column)}
             >
@@ -47,18 +48,3 @@ class TableHeader extends Component {
   }
 }
 export default TableHeader;
-
-// const TableHeader = ({ header }) => {
-//   console.log(header);
-//   return (
-//     <Table.Header style={{ background: "#e9ecef" }}>
-//       <Table.Row>
-//         {header.map(title => (
-//           <Table.HeaderCell key={title}>{title.label}</Table.HeaderCell>
-//         ))}
-//       </Table.Row>
-//     </Table.Header>
-//   );
-// };
-
-// export default TableHeader;

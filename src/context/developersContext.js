@@ -195,18 +195,55 @@ class DeveloperProvider extends Component {
   }
 
   handleScriptDelete = async (developerSite) => {
-    console.log("developerSite", developerSite);
-    const scripts = this.state.scripts.filter(
-      (ds) => ds.id !== developerSite.id
-    );
-    this.setState({ scripts });
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
 
-    try {
-      await deleteScript(developerSite.id);
-    } catch (ex) {
-      if (ex.response && ex.response.status === 404)
-        toast.error("This site has already been deleted.");
-    }
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then(async (result) => {
+        if (result.value) {
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            "Your file has been deleted.",
+            "success"
+          );
+
+          // console.log("developerSite", developerSite);
+          const scripts = this.state.scripts.filter(
+            (ds) => ds.id !== developerSite.id
+          );
+          this.setState({ scripts });
+
+          try {
+            await deleteScript(developerSite.id);
+          } catch (ex) {
+            if (ex.response && ex.response.status === 404)
+              toast.error("This script has already been deleted.");
+          }
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Your imaginary Script is safe :)",
+            "error"
+          );
+        }
+      });
   };
 
   handleApprovel = async (script) => {

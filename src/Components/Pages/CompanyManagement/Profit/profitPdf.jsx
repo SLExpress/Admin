@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import jspdf from "jspdf";
 import "jspdf-autotable";
 import { CompanyContext } from "../../../../context/companyContext";
+import { Buttons, IButtons } from "../../../Common/buttons";
 
 class ProfitPdf extends Component {
   static contextType = CompanyContext;
@@ -151,7 +152,13 @@ class ProfitPdf extends Component {
     // console.log("TOTAL", this.props.total);
     return (
       <div>
-        <button onClick={() => this.exportPDF()}>Generate Report</button>
+        <IButtons
+          onSubmit={() => this.exportPDF()}
+          name="Download"
+          color="blue"
+          icon="download"
+        />
+        {/* <button onClick={() => this.exportPDF()}>Generate Report</button> */}
       </div>
     );
   }
